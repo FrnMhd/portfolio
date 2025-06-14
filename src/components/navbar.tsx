@@ -6,7 +6,10 @@ export default function Navbar() {
   return (
     <nav className="bg-white shadow-md fixed w-full z-10">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        <div className="text-xl font-bold text-gray-800"><img src="https://media.licdn.com/dms/image/v2/D5603AQHVpDvnUqmPTA/profile-displayphoto-shrink_400_400/B56ZZidsHaGQAk-/0/1745408675799?e=1755129600&v=beta&t=AG9J-euQhuxGXpm-vohprZVsedQpDiJdaA9h1EkiIXk" alt="Logo" className="h-10 w-10 rounded-full" /></div>
+        <div className="text-xl font-bold text-gray-800">
+            {/*<img src="https://media.licdn.com/dms/image/v2/D5603AQHVpDvnUqmPTA/profile-displayphoto-shrink_400_400/B56ZZidsHaGQAk-/0/1745408675799?e=1755129600&v=beta&t=AG9J-euQhuxGXpm-vohprZVsedQpDiJdaA9h1EkiIXk" alt="Logo" className="h-10 w-10 rounded-full" /> */}
+            Welcome.
+            </div>
 
         <div className="hidden md:flex space-x-1">
           <a href="#" className="text-lg text-gray-600 hover:text-blue-600 hover:bg-gray-100 px-3 py-2 rounded transition duration-300">Home</a>
