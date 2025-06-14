@@ -10,7 +10,7 @@ export default function Home() {
               {<section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-100 to-white px-4">
             <div className="text-center">
               <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-4 animate-fadeIn">
-                Hi 👋, I'm Farhan
+                Hi 👋, I&apos;m Farhan
               </h1>
               <p className="text-lg md:text-2xl text-gray-600 mb-8">
                 Full Stack Developer | Automation Enthusiast
