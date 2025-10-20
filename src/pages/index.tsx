@@ -30,6 +30,38 @@ export default function Home() {
             </div>
           </section>}
         </section>
+
+        {/* experience */}
+        <section id="experience" className="py-16 bg-gray-50 dark:bg-gray-900">
+          <h2 className="text-3xl font-bold text-center mb-8">Experience</h2>
+          <div className="max-w-4xl mx-auto space-y-6">
+            <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
+              <h3 className="font-semibold text-xl">Full Stack / Backend Developer Intern — Trogon Media Calicut</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">Jun 2025 - Present</p>
+              <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 text-sm space-y-1">
+                <li>Developed SaaS dashboards / web apps using Bootstrap, Codeignitor/Laravel, and API integration.</li>
+                <li>Integrated Payment gateways and CRM systems.</li>
+              </ul>
+            </div>
+            <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
+              <h3 className="font-semibold text-xl">Flutter Developer - Maitexa Solutions Calicut</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">Jul 2024 - Aug 2024</p>
+              <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 text-sm space-y-1">
+                <li>Developed and maintained cross-platform mobile applications for notes management using Flutter and Dart, ensuring compatibility with both iOS and Android.</li>
+                <li>Implemented user authentication, data storage, and real-time updates using Firebase.</li>
+              </ul>
+            </div>
+            <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
+              <h3 className="font-semibold text-xl">Freelance Developer</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">Mar 2020 - Present</p>
+              <ul className="list-disc ml-5 text-gray-700 dark:text-gray-300 text-sm space-y-1">
+                <li>Integrated and Deployed websites using HTML, CSS, JavaScript languages.</li>
+                <li>Created powerful Content Management Systems to serve as an interface</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
         {/* projects */}
         <section id="projects" className="py-20 bg-gray-50 px-4">
             <div className="max-w-6xl mx-auto text-center">
