@@ -1,6 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html {
+html, body {
   scroll-behavior: smooth;
+  background: radial-gradient(circle at 25% 25%, #0b0c10, #111827);
+  color: #e5e7eb;
+  font-family: 'Inter', sans-serif;
+  cursor: none !important;
 }
