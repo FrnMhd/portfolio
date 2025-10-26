@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import Reveal from "@/components/Reveal";
-import { section } from "framer-motion/m";
 
 export default function ContactSection() {
   const [hoveredContact, setHoveredContact] = useState<number | null>(null);

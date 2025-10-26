@@ -86,7 +86,7 @@ export default function AboutSection() {
               </div>
 
               <p className="text-lg text-gray-300 leading-relaxed">
-                I'm a passionate developer with hands-on experience in{" "}
+                I&apos;m a passionate developer with hands-on experience in{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-semibold">
                   full-stack development
                 </span>
