@@ -4,34 +4,38 @@ import { useEffect, useState } from "react";
 export default function CursorTrail() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const [trails, setTrails] = useState([]);
+  const [trails, setTrails] = useState<{ x: number; y: number; id: number }[]>([]);
 
-  useEffect(() => {
-    const move = (e) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-      
-      // Add trail particle
-      setTrails(prev => [...prev, {
-        x: e.clientX,
-        y: e.clientY,
-        id: Date.now() + Math.random()
-      }].slice(-20));
+    useEffect(() => {
+    const move = (e: MouseEvent) => {
+        setPosition({ x: e.clientX, y: e.clientY });
+
+        // Add trail particle
+        setTrails(prev => [
+        ...prev,
+        {
+            x: e.clientX,
+            y: e.clientY,
+            id: Date.now() + Math.random(),
+        },
+        ].slice(-20));
     };
 
-    const checkHover = (e) => {
-      const target = e.target;
-      const isInteractive = target.closest('a, button, input, textarea, [role="button"]');
-      setIsHovering(!!isInteractive);
+    const checkHover = (e: MouseEvent) => {
+        const target = e.target as HTMLElement | null;
+        const isInteractive = target?.closest('a, button, input, textarea, [role="button"]');
+        setIsHovering(!!isInteractive);
     };
 
     window.addEventListener("mousemove", move);
     window.addEventListener("mouseover", checkHover);
-    
+
     return () => {
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mouseover", checkHover);
+        window.removeEventListener("mousemove", move);
+        window.removeEventListener("mouseover", checkHover);
     };
-  }, []);
+    }, []);
+
 
   return (
     <>

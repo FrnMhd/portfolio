@@ -1,9 +1,14 @@
 // components/Reveal.tsx
 "use client";
 import { motion, useAnimation, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, ReactNode } from "react";
 
-export default function Reveal({ children, delay = 0 }) {
+type RevealProps = {
+  children: ReactNode;
+  delay?: number;
+};
+
+export default function Reveal({ children, delay = 0 }: RevealProps) {
   const ref = useRef(null);
   const controls = useAnimation();
   const inView = useInView(ref, { once: true, margin: "-50px" });
