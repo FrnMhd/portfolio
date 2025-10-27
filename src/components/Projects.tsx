@@ -108,7 +108,7 @@ export default function Projects() {
                         </span>
                       ))}
                     </div>
-
+                    
                     {/* Link */}
                     <a
                       href={project.link}
@@ -145,7 +145,7 @@ export default function Projects() {
                       </svg>
                     </a>
                   </div>
-
+                  
                   {/* Corner accent */}
                   <div
                     className={`absolute bottom-4 right-4 w-12 h-12 bg-gradient-to-br ${project.gradient} rounded-full opacity-0 group-hover:opacity-10 blur-xl transition-opacity duration-500`}

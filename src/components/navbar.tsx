@@ -11,7 +11,7 @@ export default function Navbar() {
       setScrolled(window.scrollY > 20);
       
       // Update active section based on scroll position
-      const sections = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
+      const sections = ['home', 'experience','projects','about', 'tech-stack','contact'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -29,10 +29,10 @@ export default function Navbar() {
 
   const navItems = [
     { href: "#home", label: "Home", icon: <FaHome className="w-4 h-4" /> },
-    { href: "#about", label: "About", icon: <FaUser className="w-4 h-4" /> },
-    { href: "#skills", label: "Skills", icon: <FaCode className="w-4 h-4" /> },
-    { href: "#projects", label: "Projects", icon: <FaRocket className="w-4 h-4" /> },
     { href: "#experience", label: "Experience", icon: <FaBriefcase className="w-4 h-4" /> },
+    { href: "#projects", label: "Projects", icon: <FaRocket className="w-4 h-4" /> },
+    { href: "#about", label: "About", icon: <FaUser className="w-4 h-4" /> },
+    // { href: "#tech-stack", label: "Skills", icon: <FaCode className="w-4 h-4" /> },
     { href: "#contact", label: "Contact", icon: <FaEnvelope className="w-4 h-4" /> },
   ];
 
