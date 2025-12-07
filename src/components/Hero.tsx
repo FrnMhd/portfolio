@@ -41,7 +41,7 @@ export default function Hero() {
         }`}
       >
         <div className="flex flex-col items-center gap-2 text-gray-400 animate-bounce">
-          <span className="text-xs font-medium">Scroll to explore</span>
+          <span className="text-xs font-medium">Scroll Down </span>
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
@@ -134,7 +134,7 @@ export default function Hero() {
           }`}
         >
           <div className="text-gray-500 text-sm font-medium">Tech Stack:</div>
-          {['React', 'Next.js', 'TypeScript', 'Node.js', 'Laravel', 'Flutter'].map((tech, i) => (
+          {['React/Next.js', 'Node.js', 'Laravel', 'Python'].map((tech, i) => (
             <div
               key={tech}
               className="px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg text-gray-300 text-sm font-medium hover:bg-white/10 hover:border-emerald-400/30 hover:text-emerald-400 transition-all duration-300 hover:-translate-y-1 cursor-default"
