@@ -17,11 +17,11 @@ export default function AboutSection() {
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
         description: "Node.js, Laravel, APIs" 
     },
-    { 
-        name: "Mobile Development", 
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg",
-        description: "Flutter, Cross-platform" 
-    },
+    // { 
+    //     name: "Mobile Development", 
+    //     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg",
+    //     description: "Flutter, Cross-platform" 
+    // },
     { 
         name: "Python Scripting", 
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
