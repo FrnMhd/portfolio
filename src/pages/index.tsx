@@ -9,7 +9,9 @@ import Projects from "@/components/Projects";
 import AboutSection from "@/components/AboutSection";
 import ContactSection from "@/components/ContactSection";
 
-import Snowfall from "react-snowfall";
+// import Snowfall from "react-snowfall";
+
+import SnowFall from "@/components/SnowFall";
 
 import Head from "next/head"
 
@@ -26,11 +28,13 @@ export default function Home() {
         <CursorTrail />
         <Navbar />
         
-        <Snowfall
+        {/* <Snowfall
           snowflakeCount={150}
           color="white"
           style={{ zIndex: 9999 }}
-        />
+        /> */}
+
+        <SnowFall />
         
         {/* hero sec */}
         <Hero />
