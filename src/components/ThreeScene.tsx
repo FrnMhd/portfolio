@@ -7,14 +7,14 @@ import * as THREE from "three";
 
 function ParticleField() {
   const ref = useRef<THREE.Points>(null);
-  
+
   const count = 300;
   const positions = new Float32Array(count * 3);
   for (let i = 0; i < count; i++) {
     const r = 2.0 + Math.random() * 3.5;
     const theta = Math.random() * Math.PI * 2;
     const phi = Math.acos(2 * Math.random() - 1);
-    
+
     positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
     positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
     positions[i * 3 + 2] = r * Math.cos(phi);
@@ -54,29 +54,48 @@ function Gyroscope() {
     const pointerX = state.pointer.x * 0.4;
     const pointerY = state.pointer.y * 0.4;
 
-    // Orbiting light to create dynamic reflections along the rings
+    // Normalize window scroll relative to typical hero section height (approx 850px)
+    const scrollY = typeof window !== "undefined" ? window.scrollY : 0;
+    const scrollRatio = Math.min(scrollY / 850, 1.25);
+
+    // Cinematic camera pan and zoom out as we scroll
+    state.camera.position.z = 4.5 + scrollRatio * 2.5; // zooms out from 4.5 to 7.0
+    state.camera.position.y = -scrollRatio * 1.5;      // camera pans downward
+    state.camera.lookAt(0, 0, 0);
+
+    // Orbiting light speed increases as we scroll
+    const speedMult = 1.0 + scrollRatio * 2.0;
     if (lightRef.current) {
-      lightRef.current.position.x = Math.sin(time * 1.8) * 3;
-      lightRef.current.position.y = Math.cos(time * 1.3) * 3;
-      lightRef.current.position.z = Math.sin(time * 0.9) * 2;
+      lightRef.current.position.x = Math.sin(time * 1.8 * speedMult) * 3;
+      lightRef.current.position.y = Math.cos(time * 1.3 * speedMult) * 3;
+      lightRef.current.position.z = Math.sin(time * 0.9 * speedMult) * 2;
     }
 
-    // Outer Ring (Brushed Steel)
+    // Ring rotation velocities speed up slightly
+    const rotationSpeed = time * speedMult;
+
+    // Outer Ring (Brushed Steel) -> expands outwards on scroll
     if (ring1Ref.current) {
-      ring1Ref.current.rotation.y = time * 0.12 + pointerX;
+      ring1Ref.current.rotation.y = rotationSpeed * 0.12 + pointerX;
       ring1Ref.current.rotation.x = pointerY;
+      const ring1Scale = 1.0 + scrollRatio * 0.35;
+      ring1Ref.current.scale.set(ring1Scale, ring1Scale, ring1Scale);
     }
 
-    // Middle Ring (Light Aluminum)
+    // Middle Ring (Light Aluminum) -> expands slightly on scroll
     if (ring2Ref.current) {
-      ring2Ref.current.rotation.x = time * 0.18 + pointerY;
+      ring2Ref.current.rotation.x = rotationSpeed * 0.18 + pointerY;
       ring2Ref.current.rotation.y = -pointerX;
+      const ring2Scale = 1.0 + scrollRatio * 0.18;
+      ring2Ref.current.scale.set(ring2Scale, ring2Scale, ring2Scale);
     }
 
-    // Inner Ring (Brushed Steel)
+    // Inner Ring (Brushed Steel) -> stays central
     if (ring3Ref.current) {
-      ring3Ref.current.rotation.z = time * 0.25 + pointerX;
-      ring3Ref.current.rotation.y = time * 0.08 - pointerY;
+      ring3Ref.current.rotation.z = rotationSpeed * 0.25 + pointerX;
+      ring3Ref.current.rotation.y = rotationSpeed * 0.08 - pointerY;
+      const ring3Scale = 1.0;
+      ring3Ref.current.scale.set(ring3Scale, ring3Scale, ring3Scale);
     }
 
     // Pulsate the core
@@ -141,7 +160,7 @@ function Gyroscope() {
           wireframe
         />
       </mesh>
-      
+
       {/* Glowing Inner Solid Core (Soft Ivory Warmth) */}
       <mesh ref={coreRef}>
         <dodecahedronGeometry args={[0.3, 0]} />
