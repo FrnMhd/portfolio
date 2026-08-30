@@ -10,7 +10,7 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-      
+
       const sections = ['home', 'experience', 'projects', 'about', 'contact'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
@@ -37,20 +37,19 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-      scrolled 
-        ? "bg-background/95 border-b border-stone-800" 
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled
+        ? "bg-background/95 border-b border-stone-800"
         : "bg-transparent border-b border-transparent"
-    }`}>
+      }`}>
       <div className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between font-mono">
-        
+
         {/* Brand */}
         <a href="#home" className="group flex flex-col items-start leading-none">
           <span className="font-serif font-bold text-xl tracking-wider text-ivory">
             FARHAN M.
           </span>
           <span className="text-[10px] text-accent font-mono mt-1 tracking-widest uppercase">
-            [software_architect]
+            [software_engineer]
           </span>
         </a>
 
@@ -62,15 +61,14 @@ export default function Navbar() {
               <a
                 key={i}
                 href={item.href}
-                className={`relative px-4 py-2 transition-all duration-200 uppercase tracking-wider ${
-                  isActive 
-                    ? "text-accent font-semibold" 
+                className={`relative px-4 py-2 transition-all duration-200 uppercase tracking-wider ${isActive
+                    ? "text-accent font-semibold"
                     : "text-sand hover:text-ivory"
-                }`}
+                  }`}
               >
                 <span className="text-[10px] text-brass mr-1 font-mono">{item.num}.</span>
                 <span>{item.label}</span>
-                
+
                 {/* Active indicator - sharp flat line */}
                 {isActive && (
                   <span className="absolute bottom-0 left-4 right-4 h-[1px] bg-accent" />
@@ -99,9 +97,8 @@ export default function Navbar() {
                 <a
                   key={i}
                   href={item.href}
-                  className={`flex items-center py-2 transition-all duration-205 uppercase tracking-wider ${
-                    isActive ? "text-accent font-bold" : "text-sand hover:text-ivory"
-                  }`}
+                  className={`flex items-center py-2 transition-all duration-205 uppercase tracking-wider ${isActive ? "text-accent font-bold" : "text-sand hover:text-ivory"
+                    }`}
                   onClick={() => setIsOpen(false)}
                 >
                   <span className="text-[9px] text-brass mr-2 font-mono">{item.num} /</span>

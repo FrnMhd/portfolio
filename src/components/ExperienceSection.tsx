@@ -5,17 +5,17 @@ import Reveal from "@/components/Reveal";
 export default function ExperienceSection() {
   const experiences = [
     {
-      title: "Full Stack / Backend Developer Intern",
+      title: "Full Stack / Backend Developer",
       company: "Trogon Media Calicut",
       period: "Jun 2025 - Present",
       points: [
-        "Developed SaaS dashboards and web applications using Laravel, CodeIgniter, and API integration.",
+        "Developed SaaS dashboards and web applications, LMS Systems using Laravel, CodeIgniter, and API integration.",
         "Integrated payment gateways and CRM systems to streamline business operations.",
       ],
       tags: ["Laravel", "Bootstrap", "API Integration"],
     },
     {
-      title: "Flutter Developer",
+      title: "Flutter Developer Intern",
       company: "Maitexa Solutions Calicut",
       period: "Jul 2024 - Aug 2024",
       points: [
@@ -42,7 +42,7 @@ export default function ExperienceSection() {
       className="py-32 bg-background relative overflow-hidden border-b border-stone-800"
     >
       <div className="max-w-6xl mx-auto px-6 relative">
-        
+
         {/* Section Header */}
         <Reveal>
           <div className="mb-20">
@@ -60,7 +60,7 @@ export default function ExperienceSection() {
           {experiences.map((exp, i) => (
             <Reveal key={i} delay={i * 0.15}>
               <div className="py-12 border-b border-stone-800 grid grid-cols-1 md:grid-cols-12 gap-8 items-start hover:bg-surface/10 transition-colors duration-300 px-2">
-                
+
                 {/* Left Column: Dates & Company (4 cols) */}
                 <div className="md:col-span-4 font-mono">
                   <div className="text-accent text-xs font-semibold uppercase tracking-wider mb-1">
@@ -76,7 +76,7 @@ export default function ExperienceSection() {
                   <h3 className="font-serif text-2xl font-light text-ivory mb-4 tracking-wide">
                     {exp.title}
                   </h3>
-                  
+
                   {/* Points (Clean dashes instead of checkmark bullets) */}
                   <ul className="space-y-3 mb-6 font-mono text-xs text-sand">
                     {exp.points.map((point, idx) => (

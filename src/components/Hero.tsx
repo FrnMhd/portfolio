@@ -81,13 +81,26 @@ export default function Hero() {
         </div>
 
         {/* Right Column: 3D interactive mesh */}
-        <div className="md:col-span-5 w-full h-[350px] md:h-[500px] flex items-center justify-center relative">
+        <div className="md:col-span-5 w-full h-[350px] md:h-[480px] flex items-center justify-center relative p-4">
           {mounted && (
-            <div className="w-full h-full border border-stone-850 bg-surface/20">
-              {/* Technical framing lines */}
-              <div className="absolute top-2 left-2 text-[9px] font-mono text-stone-600">// WEBGL_ENGINE_ACTIVE</div>
-              <div className="absolute bottom-2 right-2 text-[9px] font-mono text-stone-600">3D_COORD: [X:VAR, Y:VAR]</div>
-              <ThreeScene />
+            <div className="w-full h-full border border-stone-800 bg-surface/10 relative flex items-center justify-center">
+              {/* Drafting plus signs in all 4 corners */}
+              <span className="absolute -top-1.5 -left-1.5 text-stone-600 font-mono text-xs select-none">+</span>
+              <span className="absolute -top-1.5 -right-1.5 text-stone-600 font-mono text-xs select-none">+</span>
+              <span className="absolute -bottom-1.5 -left-1.5 text-stone-600 font-mono text-xs select-none">+</span>
+              <span className="absolute -bottom-1.5 -right-1.5 text-stone-600 font-mono text-xs select-none">+</span>
+
+              {/* Technical framing labels */}
+              <div className="absolute top-3 left-4 text-[8px] font-mono text-brass tracking-wider uppercase select-none">
+                // system_simulation: active
+              </div>
+              <div className="absolute bottom-3 right-4 text-[8px] font-mono text-stone-500 tracking-wider uppercase select-none">
+                3d_ref: [gimbal_system_01]
+              </div>
+              
+              <div className="w-full h-full">
+                <ThreeScene />
+              </div>
             </div>
           )}
         </div>
