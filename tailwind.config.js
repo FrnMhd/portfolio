@@ -5,19 +5,21 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        serif: ['var(--font-serif)', 'serif'],
+        mono: ['var(--font-mono)', 'monospace'],
+      },
       animation: {
-      fadeIn: 'fadeIn 1.5s ease-in-out',
+        fadeIn: 'fadeIn 1.5s ease-in-out',
       },
       colors: {
-      background: '#0b0c10',
-      surface: '#121417',
-      accent: '#14b8a6',   // teal
-      highlight: '#38bdf8', // cyan
-      text: '#e5e7eb',
-      lightbg: '#222b37ff',
-      },
-      boxShadow: {
-        'glow': '0 0 20px rgba(54, 165, 217, 0.4), 0 0 20px rgba(122, 104, 238, 0.4)',
+        background: '#121211',
+        surface: '#1a1a19',
+        accent: '#c87040',        // Rust
+        brass: '#c2a678',         // Brass
+        ivory: '#f4f4f0',         // Soft Ivory
+        sand: '#9c9a96',          // Sand
+        accentDark: '#1c1c1a',
       },
       keyframes: {
         fadeIn: {

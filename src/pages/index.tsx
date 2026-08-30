@@ -1,56 +1,29 @@
 
-import CursorTrail from "@/components/CursorTrail";
+import Head from "next/head";
 import Navbar from "@/components/navbar";
 import Hero from "@/components/Hero";
 import ExperienceSection from "@/components/ExperienceSection";
-
-import ScrollProgress from "@/components/ScrollProgress";
 import Projects from "@/components/Projects";
 import AboutSection from "@/components/AboutSection";
 import ContactSection from "@/components/ContactSection";
-
-// import Snowfall from "react-snowfall";
-
-import SnowFall from "@/components/SnowFall";
-
-import Head from "next/head"
+import ScrollProgress from "@/components/ScrollProgress";
 
 export default function Home() {
   return (
     <>
-        <Head>
-          <title>Farhan M - Full-Stack Developer Portfolio</title>
-          <meta name="description" content="Farhan M's portfolio showcasing projects, experience, and skills as a full-stack developer." />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <ScrollProgress />
-        <CursorTrail />
-        <Navbar />
-        
-        {/* <Snowfall
-          snowflakeCount={150}
-          color="white"
-          style={{ zIndex: 9999 }}
-        /> */}
-
-        <SnowFall />
-        
-        {/* hero sec */}
-        <Hero />
-
-        {/* experience */}
-        <ExperienceSection />
-
-        {/* projects */}
-        <Projects />
-
-        {/* about sec */}
-        <AboutSection />           
-
-        {/* contact sec */}
-        <ContactSection />
-    
+      <Head>
+        <title>Farhan M — Developer & Automation Designer</title>
+        <meta name="description" content="Farhan M's personal developer portfolio showcasing architectural design, software development, and automation." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <ScrollProgress />
+      <Navbar />
+      <Hero />
+      <ExperienceSection />
+      <Projects />
+      <AboutSection />
+      <ContactSection />
     </>
   );
 }

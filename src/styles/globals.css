@@ -3,8 +3,16 @@
 @tailwind utilities;
 html, body {
   scroll-behavior: smooth;
-  background: radial-gradient(circle at 25% 25%, #0b0c10, #111827);
-  color: #e5e7eb;
-  font-family: 'Inter', sans-serif;
-  cursor: none !important;
+  background-color: #121211;
+  color: #f4f4f0;
+  font-family: var(--font-mono), monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif), serif;
+}
+
+::selection {
+  background-color: #c87040;
+  color: #f4f4f0;
 }
