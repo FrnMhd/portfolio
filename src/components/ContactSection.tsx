@@ -53,7 +53,7 @@ export default function ContactSection() {
               
               <div className="border border-stone-850 bg-surface/10 p-8 w-full max-w-xl">
                 <span className="text-brass uppercase tracking-widest text-[10px] font-semibold block mb-4">
-                  // COMMUNICATIONS_STATUS
+                  {"// COMMUNICATIONS_STATUS"}
                 </span>
                 <div className="flex items-center gap-3">
                   <span className="w-2 h-2 bg-accent inline-block animate-pulse" />

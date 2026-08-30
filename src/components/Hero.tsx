@@ -38,7 +38,7 @@ export default function Hero() {
   const webglOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
 
   // Easing definitions for intro load
-  const easeCurve = [0.16, 1, 0.3, 1]; // Premium snappy cubic-bezier
+  const easeCurve = [0.16, 1, 0.3, 1] as const; // Premium snappy cubic-bezier
 
   return (
     <section
@@ -146,18 +146,18 @@ export default function Hero() {
             />
             <span className="text-brass uppercase tracking-widest block mb-3 font-semibold">[CORE_SYSTEMS]</span>
             <div className="flex flex-wrap gap-x-6 gap-y-2">
-              <div>// NEXT.JS</div>
-              <div>// LARAVEL</div>
-              <div>// PYTHON</div>
-              <div>// NODEJS</div>
-              <div>// API_SYSTEMS</div>
+              <div>{"// NEXT.JS"}</div>
+              <div>{"// LARAVEL"}</div>
+              <div>{"// PYTHON"}</div>
+              <div>{"// NODEJS"}</div>
+              <div>{"// API_SYSTEMS"}</div>
             </div>
           </motion.div>
 
         </div>
 
         {/* Right Column: 3D interactive mesh */}
-        <motion.div
+        <motion.div 
           style={{ y: webglY, opacity: webglOpacity }}
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -174,7 +174,7 @@ export default function Hero() {
 
               {/* Technical framing labels */}
               <div className="absolute top-3 left-4 text-[8px] font-mono text-brass tracking-wider uppercase select-none">
-                // system_simulation: active
+                {"// system_simulation: active"}
               </div>
               <div className="absolute bottom-3 right-4 text-[8px] font-mono text-stone-500 tracking-wider uppercase select-none">
                 3d_ref: [gimbal_system_01]

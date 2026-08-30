@@ -15,7 +15,7 @@ export default function Reveal({ children, delay = 0 }: RevealProps) {
 
   useEffect(() => {
     if (inView) controls.start("visible");
-  }, [inView]);
+  }, [inView, controls]);
 
   return (
     <motion.div
