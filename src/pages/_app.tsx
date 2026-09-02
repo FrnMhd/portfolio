@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { Cormorant_Garamond, Space_Mono } from 'next/font/google';
+import { ThemeProvider } from "@/context/ThemeContext";
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -16,8 +17,10 @@ const spaceMono = Space_Mono({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={`${cormorant.variable} ${spaceMono.variable} font-mono bg-[#121211] text-[#f4f4f0] min-h-screen`}>
-      <Component {...pageProps} />
-    </main>
+    <ThemeProvider>
+      <main className={`${cormorant.variable} ${spaceMono.variable} font-mono bg-background text-ivory min-h-screen transition-colors duration-400`}>
+        <Component {...pageProps} />
+      </main>
+    </ThemeProvider>
   );
 }

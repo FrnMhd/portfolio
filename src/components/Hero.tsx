@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform } from "framer-motion";
+import ArchitecturalTitleHover from "./ArchitecturalTitleHover";
 
 // Dynamically import ThreeScene to prevent SSR/hydration issues with WebGL
 const ThreeScene = dynamic(() => import("./ThreeScene"), { ssr: false });
@@ -64,28 +65,27 @@ export default function Hero() {
             <span>Active / Open for Opportunities</span>
           </motion.div>
 
-          {/* Masked Heading Reveal (Slides up from overflow-hidden container) */}
+          {/* Masked Heading Reveal with Clean Architectural Hover Kinetics */}
           <motion.div style={{ y: titleY, opacity: titleOpacity }} className="w-full">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-light text-ivory tracking-tight leading-[1.05] mb-6">
-              <div className="overflow-hidden h-fit relative py-1">
-                <motion.div
-                  initial={{ y: "100%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1.2, ease: easeCurve, delay: 0.2 }}
-                >
-                  Farhan M.
-                </motion.div>
-              </div>
-              <div className="overflow-hidden h-fit relative py-1">
-                <motion.div
-                  initial={{ y: "100%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1.2, ease: easeCurve, delay: 0.35 }}
-                  className="font-serif italic text-accent font-normal"
-                >
-                  Software Developer
-                </motion.div>
-              </div>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-light text-ivory tracking-tight leading-[1.05] mb-6 flex flex-col items-start gap-1">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.0, ease: easeCurve, delay: 0.2 }}
+              >
+                <ArchitecturalTitleHover text="Farhan M." />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.0, ease: easeCurve, delay: 0.35 }}
+              >
+                <ArchitecturalTitleHover
+                  text="Software Developer"
+                  isItalic={true}
+                  className="text-accent"
+                />
+              </motion.div>
             </h1>
           </motion.div>
 

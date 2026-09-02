@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import Reveal from "@/components/Reveal";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Projects() {
   const [activeProject, setActiveProject] = useState<number | null>(0);
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   const projects = [
     {
@@ -35,7 +37,7 @@ export default function Projects() {
       id="projects"
       className="py-32 bg-background relative overflow-hidden border-b border-stone-800"
     >
-      <div className="max-w-6xl mx-auto px-6 relative">
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
         <Reveal>
@@ -49,24 +51,76 @@ export default function Projects() {
           </div>
         </Reveal>
 
-        {/* Interactive List (Accordion Rows) */}
+        {/* Interactive List (Accordion Rows with Tactical Reticle Brackets) */}
         <div className="mt-12 border-t border-stone-800">
           {projects.map((project, i) => {
             const isExpanded = activeProject === i;
+            const isHovered = hoveredIdx === i;
+
             return (
               <div
                 key={i}
-                className="border-b border-stone-800 transition-colors duration-300"
+                onMouseEnter={() => setHoveredIdx(i)}
+                onMouseLeave={() => setHoveredIdx(null)}
+                className={`relative border-b border-stone-800 transition-all duration-300 ${
+                  isExpanded ? "bg-surface/20" : isHovered ? "bg-surface/10" : ""
+                }`}
               >
+                {/* Tactical Reticle Lock Corner Brackets on Hover/Expand */}
+                <AnimatePresence>
+                  {(isExpanded || isHovered) && (
+                    <>
+                      <motion.span
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        className="absolute top-2 left-2 text-accent font-mono text-xs select-none pointer-events-none z-20"
+                      >
+                        ┌
+                      </motion.span>
+                      <motion.span
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        className="absolute top-2 right-2 text-accent font-mono text-xs select-none pointer-events-none z-20"
+                      >
+                        ┐
+                      </motion.span>
+                      <motion.span
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        className="absolute bottom-2 left-2 text-accent font-mono text-xs select-none pointer-events-none z-20"
+                      >
+                        └
+                      </motion.span>
+                      <motion.span
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        className="absolute bottom-2 right-2 text-accent font-mono text-xs select-none pointer-events-none z-20"
+                      >
+                        ┘
+                      </motion.span>
+                    </>
+                  )}
+                </AnimatePresence>
+
                 {/* Accordion Trigger Header */}
                 <button
                   onClick={() => setActiveProject(isExpanded ? null : i)}
-                  className="w-full py-8 flex flex-col md:flex-row md:items-center justify-between text-left group focus:outline-none"
+                  className="w-full py-8 px-4 flex flex-col md:flex-row md:items-center justify-between text-left group focus:outline-none relative z-10"
                 >
-                  <div className="flex items-baseline gap-6">
-                    <span className="font-mono text-xs text-accent">
-                      {project.num}/
-                    </span>
+                  <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-xs text-accent font-bold">
+                        {project.num}/
+                      </span>
+                      {isHovered && (
+                        <span className="w-1.5 h-1.5 bg-accent rounded-full animate-ping" />
+                      )}
+                    </div>
+                    
                     <span className="font-serif text-3xl md:text-4xl font-light text-ivory group-hover:text-brass transition-colors duration-300">
                       {project.title}
                     </span>
@@ -79,11 +133,11 @@ export default function Projects() {
 
                 {/* Accordion Content Panel */}
                 <div
-                  className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                  className={`overflow-hidden transition-all duration-500 ease-in-out px-4 ${
                     isExpanded ? "max-h-[500px] opacity-100 pb-12" : "max-h-0 opacity-0"
                   }`}
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pt-4 border-t border-stone-850/50">
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pt-4 border-t border-stone-800/80">
                     
                     {/* Left details (8 cols) */}
                     <div className="md:col-span-8 flex flex-col justify-between">
@@ -96,7 +150,7 @@ export default function Projects() {
                         {project.tech.map((t, idx) => (
                           <span
                             key={idx}
-                            className="px-2.5 py-1 text-[9px] font-mono uppercase tracking-wider text-accent border border-stone-800 bg-surface/30"
+                            className="px-2.5 py-1 text-[9px] font-mono uppercase tracking-wider text-accent border border-accent/30 bg-accent/5 hover:border-accent transition-colors duration-200"
                           >
                             {t}
                           </span>
@@ -110,9 +164,10 @@ export default function Projects() {
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-mono text-xs uppercase tracking-wider text-ivory border border-stone-750 px-5 py-3 hover:border-accent hover:text-accent transition-all duration-300"
+                        className="group/btn relative inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-ivory border border-accent/50 px-6 py-3 hover:bg-accent hover:text-background transition-all duration-300 shadow-[0_0_15px_rgba(200,112,64,0.15)]"
                       >
-                        [ launch project ]
+                        <span>[ open project ]</span>
+                        <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
                       </a>
                     </div>
 
@@ -131,10 +186,10 @@ export default function Projects() {
               href="https://github.com/FrnMhd"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 font-mono text-xs uppercase tracking-wider text-sand hover:text-ivory py-2"
+              className="group inline-flex items-center gap-3 font-mono text-xs uppercase tracking-wider text-sand hover:text-accent transition-colors py-2"
             >
               <span>[ view more code archives on github ]</span>
-              <span className="group-hover:translate-x-1 transition-transform">→</span>
+              <span className="group-hover:translate-x-1.5 transition-transform text-accent">→</span>
             </a>
           </div>
         </Reveal>

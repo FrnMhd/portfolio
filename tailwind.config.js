@@ -13,13 +13,16 @@ module.exports = {
         fadeIn: 'fadeIn 1.5s ease-in-out',
       },
       colors: {
-        background: '#121211',
-        surface: '#1a1a19',
-        accent: '#c87040',        // Rust
-        brass: '#c2a678',         // Brass
-        ivory: '#f4f4f0',         // Soft Ivory
-        sand: '#9c9a96',          // Sand
-        accentDark: '#1c1c1a',
+        background: 'var(--bg-main)',
+        surface: 'var(--bg-surface)',
+        card: 'var(--bg-card)',
+        accent: 'var(--accent)',
+        brass: 'var(--text-brass)',
+        ivory: 'var(--text-ivory)',
+        sand: 'var(--text-sand)',
+        accentDark: 'var(--accent-dark)',
+        borderSubtle: 'var(--border-subtle)',
+        borderStrong: 'var(--border-strong)',
       },
       keyframes: {
         fadeIn: {
@@ -31,4 +34,3 @@ module.exports = {
   },
   plugins: [],
 }
-
