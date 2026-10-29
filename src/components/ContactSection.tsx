@@ -46,7 +46,7 @@ export default function ContactSection() {
             <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between">
               <div>
                 <span className="text-[10px] text-brass font-mono uppercase tracking-widest block mb-3">
-                  [ 05 / ENDPOINT_TRANSMISSION ]
+                  [ 06 / ENDPOINT_TRANSMISSION ]
                 </span>
                 <h2 className="text-4xl md:text-5xl font-light text-ivory tracking-tight">
                   Get In <span className="font-serif italic font-normal text-accent">Touch</span>

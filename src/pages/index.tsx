@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar";
 import Hero from "@/components/Hero";
 import ExperienceSection from "@/components/ExperienceSection";
 import Projects from "@/components/Projects";
+import ScrollStory from "@/components/ScrollStory";
 import AboutSection from "@/components/AboutSection";
 import ContactSection from "@/components/ContactSection";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -24,6 +25,7 @@ export default function Home() {
       <Hero />
       <ExperienceSection />
       <Projects />
+      <ScrollStory />
       <AboutSection />
       <ContactSection />
     </>
