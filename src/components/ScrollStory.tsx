@@ -1,7 +1,8 @@
+
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useReducedMotion, type MotionValue } from "framer-motion";
 
 // ============================================================================
 // STAGE CONFIGURATION
@@ -81,7 +82,7 @@ export const STORY_STAGES: StoryStage[] = [
 // 100% OPAQUE cards with clean stage progression to prevent any bleed-through.
 // ============================================================================
 interface VisualProps {
-  progress: any;
+  progress: MotionValue<number>;
 }
 
 function ArchitecturalCardStack({ progress }: VisualProps) {
@@ -485,7 +486,7 @@ export default function ScrollStory({ customVisual }: ScrollStoryProps) {
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-[10px] font-mono text-brass uppercase tracking-widest">
-                      // {stage.step} {stage.category}
+                      {"//"} {stage.step} {stage.category}
                     </span>
                     <span className="text-[9px] font-mono text-accent border border-accent/40 px-2 py-0.5">
                       {stage.statusBadge}
@@ -566,7 +567,7 @@ export default function ScrollStory({ customVisual }: ScrollStoryProps) {
               className="absolute inset-0 flex flex-col justify-center pointer-events-none"
             >
               <div className="text-[10px] text-brass font-mono uppercase tracking-widest mb-2 flex items-center gap-2">
-                <span>// 01</span>
+                <span>{"// 01"}</span>
                 <span>{STORY_STAGES[0].category}</span>
                 <span className="w-1.5 h-1.5 bg-accent" />
               </div>
@@ -592,7 +593,7 @@ export default function ScrollStory({ customVisual }: ScrollStoryProps) {
               className="absolute inset-0 flex flex-col justify-center pointer-events-none"
             >
               <div className="text-[10px] text-brass font-mono uppercase tracking-widest mb-2 flex items-center gap-2">
-                <span>// 02</span>
+                <span>{"// 02"}</span>
                 <span>{STORY_STAGES[1].category}</span>
                 <span className="w-1.5 h-1.5 bg-accent" />
               </div>
@@ -618,7 +619,7 @@ export default function ScrollStory({ customVisual }: ScrollStoryProps) {
               className="absolute inset-0 flex flex-col justify-center pointer-events-none"
             >
               <div className="text-[10px] text-brass font-mono uppercase tracking-widest mb-2 flex items-center gap-2">
-                <span>// 03</span>
+                <span>{"// 03"}</span>
                 <span>{STORY_STAGES[2].category}</span>
                 <span className="w-1.5 h-1.5 bg-accent" />
               </div>
@@ -644,7 +645,7 @@ export default function ScrollStory({ customVisual }: ScrollStoryProps) {
               className="absolute inset-0 flex flex-col justify-center pointer-events-none"
             >
               <div className="text-[10px] text-brass font-mono uppercase tracking-widest mb-2 flex items-center gap-2">
-                <span>// 04</span>
+                <span>{"// 04"}</span>
                 <span>{STORY_STAGES[3].category}</span>
                 <span className="w-1.5 h-1.5 bg-accent" />
               </div>
