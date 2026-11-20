@@ -7,6 +7,92 @@ import { motion, AnimatePresence } from "framer-motion";
 // Character codes for "+91 95267 12155" to prevent static HTML/crawler indexing
 const OBFUSCATED_TEL = [43, 57, 49, 32, 57, 53, 50, 54, 55, 32, 49, 50, 49, 53, 53];
 
+// Reusable Architectural Reticle Copy Button matching site terracotta palette
+function CopyReticleButton({
+  isCopied,
+  onCopy,
+}: {
+  isCopied: boolean;
+  onCopy: () => void;
+}) {
+  return (
+    <button
+      onClick={onCopy}
+      className={`relative text-[9px] uppercase tracking-wider px-2.5 py-1.5 transition-all duration-300 font-mono flex items-center gap-1.5 cursor-pointer ${
+        isCopied
+          ? "border border-accent/80 bg-accent/20 text-accent font-semibold shadow-[0_0_15px_rgba(200,112,64,0.3)]"
+          : "border border-stone-800 text-stone-500 hover:text-ivory hover:border-accent/60 bg-surface/30"
+      }`}
+    >
+      {/* Corner Reticle Ticks when copied */}
+      <AnimatePresence>
+        {isCopied && (
+          <>
+            <motion.span
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute -top-1 -left-1 text-accent text-[8px] pointer-events-none"
+            >
+              ┌
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute -top-1 -right-1 text-accent text-[8px] pointer-events-none"
+            >
+              ┐
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute -bottom-1 -left-1 text-accent text-[8px] pointer-events-none"
+            >
+              └
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute -bottom-1 -right-1 text-accent text-[8px] pointer-events-none"
+            >
+              ┘
+            </motion.span>
+          </>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence mode="wait">
+        {isCopied ? (
+          <motion.span
+            key="copied"
+            initial={{ opacity: 0, y: -3 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 3 }}
+            className="flex items-center gap-1 text-accent"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+            <span>COPIED!</span>
+          </motion.span>
+        ) : (
+          <motion.span
+            key="copy"
+            initial={{ opacity: 0, y: 3 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -3 }}
+            className="flex items-center gap-1"
+          >
+            <span>COPY</span>
+            <span className="opacity-60">⎘</span>
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </button>
+  );
+}
+
 export default function ContactSection() {
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
@@ -129,51 +215,10 @@ export default function ContactSection() {
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <button
-                      onClick={() => handleCopy("farhanmedappil@gmail.com", "email")}
-                      className={`relative text-[9px] uppercase tracking-wider px-2.5 py-1.5 transition-all duration-300 font-mono flex items-center gap-1.5 ${
-                        copiedKey === "email"
-                          ? "border border-emerald-500/70 bg-emerald-500/10 text-emerald-400 font-semibold shadow-[0_0_15px_rgba(16,185,129,0.25)]"
-                          : "border border-stone-800 text-stone-500 hover:text-ivory hover:border-accent/60 bg-surface/30"
-                      }`}
-                    >
-                      <AnimatePresence>
-                        {copiedKey === "email" && (
-                          <>
-                            <span className="absolute -top-1 -left-1 text-emerald-400 text-[8px] pointer-events-none">┌</span>
-                            <span className="absolute -top-1 -right-1 text-emerald-400 text-[8px] pointer-events-none">┐</span>
-                            <span className="absolute -bottom-1 -left-1 text-emerald-400 text-[8px] pointer-events-none">└</span>
-                            <span className="absolute -bottom-1 -right-1 text-emerald-400 text-[8px] pointer-events-none">┘</span>
-                          </>
-                        )}
-                      </AnimatePresence>
-
-                      <AnimatePresence mode="wait">
-                        {copiedKey === "email" ? (
-                          <motion.span
-                            key="copied"
-                            initial={{ opacity: 0, y: -3 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 3 }}
-                            className="flex items-center gap-1"
-                          >
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                            <span>COPIED!</span>
-                          </motion.span>
-                        ) : (
-                          <motion.span
-                            key="copy"
-                            initial={{ opacity: 0, y: 3 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -3 }}
-                            className="flex items-center gap-1"
-                          >
-                            <span>COPY</span>
-                            <span className="opacity-60">⎘</span>
-                          </motion.span>
-                        )}
-                      </AnimatePresence>
-                    </button>
+                    <CopyReticleButton
+                      isCopied={copiedKey === "email"}
+                      onCopy={() => handleCopy("farhanmedappil@gmail.com", "email")}
+                    />
 
                     <a
                       href="mailto:farhanmedappil@gmail.com"
@@ -219,51 +264,10 @@ export default function ContactSection() {
                     {phoneRevealed ? (
                       /* Revealed state: Copy Button + Direct Call Arrow */
                       <>
-                        <button
-                          onClick={() => handleCopy(phoneText, "phone")}
-                          className={`relative text-[9px] uppercase tracking-wider px-2.5 py-1.5 transition-all duration-300 font-mono flex items-center gap-1.5 ${
-                            copiedKey === "phone"
-                              ? "border border-emerald-500/70 bg-emerald-500/10 text-emerald-400 font-semibold shadow-[0_0_15px_rgba(16,185,129,0.25)]"
-                              : "border border-stone-800 text-stone-500 hover:text-ivory hover:border-accent/60 bg-surface/30"
-                          }`}
-                        >
-                          <AnimatePresence>
-                            {copiedKey === "phone" && (
-                              <>
-                                <span className="absolute -top-1 -left-1 text-emerald-400 text-[8px] pointer-events-none">┌</span>
-                                <span className="absolute -top-1 -right-1 text-emerald-400 text-[8px] pointer-events-none">┐</span>
-                                <span className="absolute -bottom-1 -left-1 text-emerald-400 text-[8px] pointer-events-none">└</span>
-                                <span className="absolute -bottom-1 -right-1 text-emerald-400 text-[8px] pointer-events-none">┘</span>
-                              </>
-                            )}
-                          </AnimatePresence>
-
-                          <AnimatePresence mode="wait">
-                            {copiedKey === "phone" ? (
-                              <motion.span
-                                key="copied-phone"
-                                initial={{ opacity: 0, y: -3 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: 3 }}
-                                className="flex items-center gap-1"
-                              >
-                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                                <span>COPIED!</span>
-                              </motion.span>
-                            ) : (
-                              <motion.span
-                                key="copy-phone"
-                                initial={{ opacity: 0, y: 3 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -3 }}
-                                className="flex items-center gap-1"
-                              >
-                                <span>COPY</span>
-                                <span className="opacity-60">⎘</span>
-                              </motion.span>
-                            )}
-                          </AnimatePresence>
-                        </button>
+                        <CopyReticleButton
+                          isCopied={copiedKey === "phone"}
+                          onCopy={() => handleCopy(phoneText, "phone")}
+                        />
 
                         <a
                           href={`tel:${phoneText.replace(/\s+/g, "")}`}
@@ -304,51 +308,10 @@ export default function ContactSection() {
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <button
-                      onClick={() => handleCopy("https://www.linkedin.com/in/farhanmp", "linkedin")}
-                      className={`relative text-[9px] uppercase tracking-wider px-2.5 py-1.5 transition-all duration-300 font-mono flex items-center gap-1.5 ${
-                        copiedKey === "linkedin"
-                          ? "border border-emerald-500/70 bg-emerald-500/10 text-emerald-400 font-semibold shadow-[0_0_15px_rgba(16,185,129,0.25)]"
-                          : "border border-stone-800 text-stone-500 hover:text-ivory hover:border-accent/60 bg-surface/30"
-                      }`}
-                    >
-                      <AnimatePresence>
-                        {copiedKey === "linkedin" && (
-                          <>
-                            <span className="absolute -top-1 -left-1 text-emerald-400 text-[8px] pointer-events-none">┌</span>
-                            <span className="absolute -top-1 -right-1 text-emerald-400 text-[8px] pointer-events-none">┐</span>
-                            <span className="absolute -bottom-1 -left-1 text-emerald-400 text-[8px] pointer-events-none">└</span>
-                            <span className="absolute -bottom-1 -right-1 text-emerald-400 text-[8px] pointer-events-none">┘</span>
-                          </>
-                        )}
-                      </AnimatePresence>
-
-                      <AnimatePresence mode="wait">
-                        {copiedKey === "linkedin" ? (
-                          <motion.span
-                            key="copied-linkedin"
-                            initial={{ opacity: 0, y: -3 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 3 }}
-                            className="flex items-center gap-1"
-                          >
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                            <span>COPIED!</span>
-                          </motion.span>
-                        ) : (
-                          <motion.span
-                            key="copy-linkedin"
-                            initial={{ opacity: 0, y: 3 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -3 }}
-                            className="flex items-center gap-1"
-                          >
-                            <span>COPY</span>
-                            <span className="opacity-60">⎘</span>
-                          </motion.span>
-                        )}
-                      </AnimatePresence>
-                    </button>
+                    <CopyReticleButton
+                      isCopied={copiedKey === "linkedin"}
+                      onCopy={() => handleCopy("https://www.linkedin.com/in/farhanmp", "linkedin")}
+                    />
 
                     <a
                       href="https://www.linkedin.com/in/farhanmp"
@@ -380,51 +343,10 @@ export default function ContactSection() {
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <button
-                      onClick={() => handleCopy("https://github.com/FrnMhd", "github")}
-                      className={`relative text-[9px] uppercase tracking-wider px-2.5 py-1.5 transition-all duration-300 font-mono flex items-center gap-1.5 ${
-                        copiedKey === "github"
-                          ? "border border-emerald-500/70 bg-emerald-500/10 text-emerald-400 font-semibold shadow-[0_0_15px_rgba(16,185,129,0.25)]"
-                          : "border border-stone-800 text-stone-500 hover:text-ivory hover:border-accent/60 bg-surface/30"
-                      }`}
-                    >
-                      <AnimatePresence>
-                        {copiedKey === "github" && (
-                          <>
-                            <span className="absolute -top-1 -left-1 text-emerald-400 text-[8px] pointer-events-none">┌</span>
-                            <span className="absolute -top-1 -right-1 text-emerald-400 text-[8px] pointer-events-none">┐</span>
-                            <span className="absolute -bottom-1 -left-1 text-emerald-400 text-[8px] pointer-events-none">└</span>
-                            <span className="absolute -bottom-1 -right-1 text-emerald-400 text-[8px] pointer-events-none">┘</span>
-                          </>
-                        )}
-                      </AnimatePresence>
-
-                      <AnimatePresence mode="wait">
-                        {copiedKey === "github" ? (
-                          <motion.span
-                            key="copied-github"
-                            initial={{ opacity: 0, y: -3 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 3 }}
-                            className="flex items-center gap-1"
-                          >
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                            <span>COPIED!</span>
-                          </motion.span>
-                        ) : (
-                          <motion.span
-                            key="copy-github"
-                            initial={{ opacity: 0, y: 3 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -3 }}
-                            className="flex items-center gap-1"
-                          >
-                            <span>COPY</span>
-                            <span className="opacity-60">⎘</span>
-                          </motion.span>
-                        )}
-                      </AnimatePresence>
-                    </button>
+                    <CopyReticleButton
+                      isCopied={copiedKey === "github"}
+                      onCopy={() => handleCopy("https://github.com/FrnMhd", "github")}
+                    />
 
                     <a
                       href="https://github.com/FrnMhd"
