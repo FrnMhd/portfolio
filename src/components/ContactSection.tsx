@@ -124,7 +124,7 @@ export default function ContactSection() {
 
             {/* Left side info (7 cols) */}
             <div className="lg:col-span-7 flex flex-col items-start font-mono text-xs text-sand">
-              <p className="leading-relaxed mb-8 max-w-xl text-sand">
+              <p className="font-sans text-sm md:text-base leading-relaxed mb-8 max-w-xl text-sand">
                 Interested in collaboration, backend system integration, or automation pipelines?
                 Feel free to establish communication through the endpoints provided here.
               </p>

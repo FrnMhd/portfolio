@@ -41,10 +41,10 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           
           {/* Biography Text (7 cols) */}
-          <div className="lg:col-span-7 space-y-6 text-sm font-mono text-sand leading-relaxed">
+          <div className="lg:col-span-7 space-y-6 font-sans text-sm md:text-base text-sand leading-relaxed">
             <Reveal delay={0.2}>
               <div>
-                <span className="text-brass uppercase tracking-widest text-[10px] font-semibold block mb-2">{"// BACKGROUND"}</span>
+                <span className="font-mono text-brass uppercase tracking-widest text-[10px] font-semibold block mb-2">{"// BACKGROUND"}</span>
                 <p>
                   I am a backend-focused software engineer building resilient APIs, asynchronous job processing engines, and media streaming gateways. 
                   Rather than being tied to any single language, I approach engineering through core system fundamentals — concurrency, data consistency, caching, and clean service decoupling.
@@ -54,7 +54,7 @@ export default function AboutSection() {
 
             <Reveal delay={0.3}>
               <div>
-                <span className="text-brass uppercase tracking-widest text-[10px] font-semibold block mb-2">{"// FOCUS"}</span>
+                <span className="font-mono text-brass uppercase tracking-widest text-[10px] font-semibold block mb-2">{"// FOCUS"}</span>
                 <p>
                   My hands-on production experience spans high-traffic platforms serving 20,000+ active users. 
                   Currently expanding across Java, Spring Boot, and Go while shipping robust Node.js and PHP/Laravel backend services.

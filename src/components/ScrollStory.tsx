@@ -513,7 +513,7 @@ export default function ScrollStory({ customVisual }: ScrollStoryProps) {
                   <h3 className="text-2xl font-light text-ivory tracking-tight mb-3">
                     {stage.title}
                   </h3>
-                  <p className="text-sm font-mono text-sand leading-relaxed mb-6">
+                  <p className="text-sm font-sans text-sand leading-relaxed mb-6">
                     {stage.description}
                   </p>
                 </div>
@@ -621,7 +621,7 @@ export default function ScrollStory({ customVisual }: ScrollStoryProps) {
               <h3 className="text-2xl sm:text-3xl font-light text-ivory tracking-tight mb-4 leading-snug">
                 {STORY_STAGES[0].title}
               </h3>
-              <p className="text-xs sm:text-sm font-mono text-sand leading-relaxed mb-6">
+              <p className="text-xs sm:text-sm font-sans text-sand leading-relaxed mb-6">
                 {STORY_STAGES[0].description}
               </p>
               <div className="space-y-1.5 border-t border-stone-800/80 pt-4 font-mono text-[10px]">
@@ -647,7 +647,7 @@ export default function ScrollStory({ customVisual }: ScrollStoryProps) {
               <h3 className="text-2xl sm:text-3xl font-light text-ivory tracking-tight mb-4 leading-snug">
                 {STORY_STAGES[1].title}
               </h3>
-              <p className="text-xs sm:text-sm font-mono text-sand leading-relaxed mb-6">
+              <p className="text-xs sm:text-sm font-sans text-sand leading-relaxed mb-6">
                 {STORY_STAGES[1].description}
               </p>
               <div className="space-y-1.5 border-t border-stone-800/80 pt-4 font-mono text-[10px]">
@@ -673,7 +673,7 @@ export default function ScrollStory({ customVisual }: ScrollStoryProps) {
               <h3 className="text-2xl sm:text-3xl font-light text-ivory tracking-tight mb-4 leading-snug">
                 {STORY_STAGES[2].title}
               </h3>
-              <p className="text-xs sm:text-sm font-mono text-sand leading-relaxed mb-6">
+              <p className="text-xs sm:text-sm font-sans text-sand leading-relaxed mb-6">
                 {STORY_STAGES[2].description}
               </p>
               <div className="space-y-1.5 border-t border-stone-800/80 pt-4 font-mono text-[10px]">
@@ -699,7 +699,7 @@ export default function ScrollStory({ customVisual }: ScrollStoryProps) {
               <h3 className="text-2xl sm:text-3xl font-light text-ivory tracking-tight mb-4 leading-snug">
                 {STORY_STAGES[3].title}
               </h3>
-              <p className="text-xs sm:text-sm font-mono text-sand leading-relaxed mb-6">
+              <p className="text-xs sm:text-sm font-sans text-sand leading-relaxed mb-6">
                 {STORY_STAGES[3].description}
               </p>
               <div className="space-y-1.5 border-t border-stone-800/80 pt-4 font-mono text-[10px]">

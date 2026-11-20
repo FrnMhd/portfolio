@@ -202,7 +202,7 @@ export default function ExperienceSection() {
                     </h3>
 
                     {/* Points */}
-                    <ul className="space-y-3 mb-6 font-mono text-xs text-sand">
+                    <ul className="space-y-3 mb-6 font-sans text-sm text-sand leading-relaxed">
                       {exp.points.map((point, idx) => (
                         <li key={idx} className="flex items-start">
                           <span className="text-accent mr-3 flex-shrink-0 select-none">

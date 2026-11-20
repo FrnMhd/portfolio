@@ -148,7 +148,7 @@ export default function Projects() {
                     
                     {/* Left details (8 cols) */}
                     <div className="md:col-span-8 flex flex-col justify-between">
-                      <p className="font-mono text-xs text-sand leading-relaxed max-w-2xl mb-6">
+                      <p className="font-sans text-sm text-sand leading-relaxed max-w-2xl mb-6">
                         {project.desc}
                       </p>
 

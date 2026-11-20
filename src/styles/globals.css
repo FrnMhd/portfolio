@@ -34,7 +34,7 @@ html, body {
   scroll-behavior: smooth;
   background-color: var(--bg-main);
   color: var(--text-ivory);
-  font-family: var(--font-mono), monospace;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, sans-serif;
   transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);

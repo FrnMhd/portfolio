@@ -113,7 +113,7 @@ export default function Hero() {
             <p className="text-xs uppercase tracking-widest text-brass font-mono mb-6">
               Backend & Distributed Systems Engineer
             </p>
-            <p className="text-sm md:text-base text-sand max-w-xl leading-relaxed mb-10 font-mono">
+            <p className="text-sm md:text-base text-sand max-w-xl leading-relaxed mb-10 font-sans">
               Language-agnostic Fullstack engineer building high-throughput streaming gateways,
               asynchronous job engines, and production APIs serving 20K+ users.
               Focused on concurrency, resilient caching, and clean service architecture.
