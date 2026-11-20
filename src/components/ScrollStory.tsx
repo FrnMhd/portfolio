@@ -25,39 +25,39 @@ export const STORY_STAGES: StoryStage[] = [
     title: "System Blueprint & Data Contracts",
     highlight: "Blueprint",
     description:
-      "Every resilient system starts with a formal architectural contract. Relational schemas, strict type boundaries, and throughput requirements are defined before drafting runtime code.",
+      "Every resilient system starts with formal architectural boundaries. Relational schemas, strict type contracts, and throughput requirements are defined before drafting runtime code.",
     specs: [
-      { label: "PARADIGM", value: "Schema-Driven Architecture" },
-      { label: "LATENCY_BUDGET", value: "< 25ms Edge Resolvers" },
-      { label: "INTERFACE", value: "Typed REST & GraphQL Contracts" },
+      { label: "PARADIGM", value: "Schema-Driven & RBAC Contracts" },
+      { label: "CONCURRENCY", value: "ACID Isolation & Row Locking" },
+      { label: "INTERFACE", value: "Typed REST & Streaming Endpoints" },
     ],
     statusBadge: "SPEC_VERIFIED",
   },
   {
     step: "02",
     category: "SERVICE_DECOUPLING",
-    title: "Exploded Architectural Planes",
+    title: "Exploded Architectural Tiers",
     highlight: "Decoupled",
     description:
-      "The monolithic blueprint decomposes into isolated spatial tiers — decoupling persistence engines, asynchronous job workers, and edge gateways to eliminate cascading failure domains.",
+      "Decomposing monolithic blueprints into isolated spatial tiers — decoupling relational storage, asynchronous background worker pools, and reverse-proxy caching gateways to eliminate cascading failure domains.",
     specs: [
-      { label: "ISOLATION", value: "Zero Cascading Blast Radius" },
-      { label: "DISPATCH", value: "Redis/Kafka Event Streams" },
-      { label: "SERVICES", value: "Storage · Worker · Gateway" },
+      { label: "TIER_01", value: "Persistence & Relational Transactions" },
+      { label: "TIER_02", value: "TaskFlow Concurrency Worker Pool" },
+      { label: "TIER_03", value: "Stream Gateway Edge Reverse-Proxy" },
     ],
     statusBadge: "LAYERS_DISPATCHED",
   },
   {
     step: "03",
-    category: "REACTIVE_PIPELINES",
-    title: "Event Loops & Automation Workers",
+    category: "CONCURRENCY_PIPELINES",
+    title: "Asynchronous Pipelines & Concurrency",
     highlight: "Reactive",
     description:
-      "Background daemons and reactive webhook processors lock into continuous execution. Telemetry buses feed real-time health pulses between database nodes and user-facing dashboards.",
+      "Background worker threads, job state machines (queued, active, failure recovery), and streaming proxies process concurrent tasks in non-blocking event loops across distributed instances.",
     specs: [
-      { label: "THROUGHPUT", value: "Non-blocking Concurrency" },
-      { label: "AUTOMATION", value: "Scheduled CRON & Webhook Hooks" },
-      { label: "TELEMETRY", value: "Realtime Health Observability" },
+      { label: "EXECUTION", value: "Multi-Threaded Worker Pool" },
+      { label: "RELIABILITY", value: "Transactional Retries & Failure Recovery" },
+      { label: "CACHING", value: "In-Memory HLS Segment Offload" },
     ],
     statusBadge: "LOOPS_SYNCHRONIZED",
   },
@@ -67,11 +67,11 @@ export const STORY_STAGES: StoryStage[] = [
     title: "Hardened Production Deployment",
     highlight: "Monolith",
     description:
-      "The decoupled tiers reassemble into a unified, high-durability production release — fortified by automated regression suites, rate-limiting armor, and edge-cached delivery.",
+      "The decoupled tiers reassemble into containerized Docker deployments — fortified by automated regression suites, origin offloading, and continuous observability serving 20,000+ users.",
     specs: [
-      { label: "UPTIME", value: "99.98% Monitored Availability" },
-      { label: "AUDIT", value: "Automated CI/CD Validation" },
-      { label: "DELIVERY", value: "Zero-Downtime Rolling Release" },
+      { label: "SCALE", value: "20,000+ Active Users Served" },
+      { label: "CONTAINER", value: "Dockerized Reproducible Runtime" },
+      { label: "RECOVERY", value: "Zero-Downtime Rollback & Health Probes" },
     ],
     statusBadge: "DEPLOYMENT_ACTIVE",
   },
@@ -197,19 +197,19 @@ function ArchitecturalCardStack({ progress }: VisualProps) {
             <div className="space-y-3 font-mono my-auto">
               <div className="p-3 bg-surface border border-stone-800">
                 <div className="flex items-center justify-between text-[10px] mb-1.5">
-                  <span className="text-accent font-bold">TYPE_SCHEMA: UserAccount</span>
+                  <span className="text-accent font-bold">TYPE_SCHEMA: DataContracts</span>
                   <span className="text-sand/70 text-[9px]">RELATIONAL</span>
                 </div>
                 <div className="text-[9px] text-sand space-y-0.5 leading-relaxed">
-                  <div>• id: <span className="text-brass">UUID (PRIMARY_KEY)</span></div>
-                  <div>• auth_identity: <span className="text-ivory">TypedClaim&lt;JWT&gt;</span></div>
-                  <div>• state_boundary: <span className="text-ivory">Immutable&lt;AuditLog&gt;</span></div>
+                  <div>• user_id: <span className="text-brass">UUID (PRIMARY_KEY)</span></div>
+                  <div>• rbac_role: <span className="text-ivory">Admin | Student | Institution</span></div>
+                  <div>• concurrency: <span className="text-ivory">PessimisticLock&lt;ACID&gt;</span></div>
                 </div>
               </div>
 
               <div className="p-2.5 bg-surface border border-stone-800 flex items-center justify-between text-[9px]">
                 <span className="text-sand">INTERFACE_RESOLVER:</span>
-                <span className="text-brass font-semibold">GraphQL & REST /v1/</span>
+                <span className="text-brass font-semibold">REST APIs & HLS Streaming /v1/</span>
               </div>
             </div>
 
@@ -242,8 +242,8 @@ function ArchitecturalCardStack({ progress }: VisualProps) {
             <div className="space-y-3 font-mono my-auto">
               <div className="p-3 bg-surface border border-accent/30">
                 <div className="flex justify-between items-center text-[10px] mb-1">
-                  <span className="text-sand">EDGE_LATENCY</span>
-                  <span className="text-ivory font-bold">14.2 ms (GLOBAL)</span>
+                  <span className="text-sand">ACTIVE_SCALE</span>
+                  <span className="text-ivory font-bold">20,000+ USERS SERVED</span>
                 </div>
                 <div className="w-full bg-background h-1.5 border border-stone-800">
                   <div className="h-full bg-accent w-[96%]" />
@@ -252,12 +252,12 @@ function ArchitecturalCardStack({ progress }: VisualProps) {
 
               <div className="grid grid-cols-2 gap-2 text-[9px]">
                 <div className="p-2 bg-surface border border-stone-800">
-                  <div className="text-sand/70 text-[8px]">UPTIME_RATING</div>
-                  <div className="text-ivory font-bold mt-0.5">99.98% AVAILABLE</div>
+                  <div className="text-sand/70 text-[8px]">CONTAINER</div>
+                  <div className="text-ivory font-bold mt-0.5">DOCKER // PROD</div>
                 </div>
                 <div className="p-2 bg-surface border border-stone-800">
-                  <div className="text-sand/70 text-[8px]">SECURITY_AUDIT</div>
-                  <div className="text-brass font-bold mt-0.5">PASS // ZERO_CVE</div>
+                  <div className="text-sand/70 text-[8px]">AVAILABILITY</div>
+                  <div className="text-brass font-bold mt-0.5">99.98% UPTIME</div>
                 </div>
               </div>
             </div>
@@ -292,7 +292,7 @@ function ArchitecturalCardStack({ progress }: VisualProps) {
             <span className="text-[9px] font-mono tracking-widest text-brass font-bold uppercase">
               TIER_01 // PERSISTENCE_ENGINE
             </span>
-            <span className="text-[8px] font-mono text-sand">SQL · REDIS CACHE</span>
+            <span className="text-[8px] font-mono text-sand">POSTGRESQL · MYSQL · REDIS</span>
           </div>
 
           <div className="my-auto py-1 font-mono text-[9px] grid grid-cols-2 gap-2">
@@ -308,7 +308,7 @@ function ArchitecturalCardStack({ progress }: VisualProps) {
 
           <div className="flex items-center justify-between text-[8px] font-mono text-sand/70 pt-1.5 border-t border-stone-800">
             <span>STORAGE INTEGRITY: ISOLATED</span>
-            <span className="text-brass">ENCRYPTION: AES-256</span>
+            <span className="text-brass">TRANSACTIONS: SERIALIZABLE</span>
           </div>
         </motion.div>
 
@@ -333,22 +333,22 @@ function ArchitecturalCardStack({ progress }: VisualProps) {
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 bg-accent animate-pulse" />
               <span className="text-[9px] font-mono tracking-widest text-ivory font-bold uppercase">
-                TIER_02 // ORCHESTRATION_ENGINE
+                TIER_02 // TASKFLOW_CONCURRENCY
               </span>
             </div>
-            <span className="text-[8px] font-mono text-accent">THREAD_POOL: 08</span>
+            <span className="text-[8px] font-mono text-accent">THREAD_POOL: 16 WORKERS</span>
           </div>
 
           {/* Automation Code Display */}
           <div className="my-auto py-1 font-mono text-[9px] bg-background/90 p-2 border border-stone-800 text-ivory leading-relaxed">
             <div>
-              <span className="text-accent">await</span> pipeline.<span className="text-brass">dispatch</span>({"{"}
+              <span className="text-accent">await</span> taskQueue.<span className="text-brass">submit</span>({"{"}
             </div>
             <div className="pl-3 text-sand">
-              event: <span className="text-brass">&quot;telemetry.pulse&quot;</span>,
+              job: <span className="text-brass">&quot;async_worker_pool&quot;</span>,
             </div>
             <div className="pl-3 text-sand">
-              daemon: <span className="text-ivory">&quot;worker_stream_01&quot;</span>,
+              priority: <span className="text-ivory">&quot;CRITICAL_RETRY&quot;</span>,
             </div>
             <div>{"}"});</div>
           </div>
@@ -357,7 +357,7 @@ function ArchitecturalCardStack({ progress }: VisualProps) {
           <div className="flex items-center justify-between text-[8px] font-mono text-accent pt-1.5 border-t border-accent/20">
             <motion.span style={{ opacity: telemetryPulse }} className="flex items-center gap-1.5 font-bold">
               <span className="w-1 h-1 bg-accent rounded-full animate-ping" />
-              STREAM: 12,450 MSG/SEC
+              THROUGHPUT: 18,200 JOBS/MIN
             </motion.span>
             <span className="text-sand/80">NON-BLOCKING WORKERS</span>
           </div>
@@ -378,25 +378,25 @@ function ArchitecturalCardStack({ progress }: VisualProps) {
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 bg-accent" />
               <span className="text-[9px] font-mono tracking-widest text-brass font-bold uppercase">
-                TIER_03 // EDGE_GATEWAY
+                TIER_03 // STREAM_GATEWAY
               </span>
             </div>
-            <span className="text-[8px] font-mono text-sand">TLS 1.3 · HTTP/3</span>
+            <span className="text-[8px] font-mono text-sand">HLS PROXY · SEGMENT CACHE</span>
           </div>
 
           <div className="my-auto py-1 font-mono text-[9px] space-y-1.5">
             <div className="flex justify-between text-sand text-[8px]">
               <span>RESOLVER_TARGET</span>
-              <span className="text-ivory font-bold">api.cluster.internal</span>
+              <span className="text-ivory font-bold">hls.proxy.cache (.m3u8)</span>
             </div>
             <div className="p-1.5 bg-surface border border-stone-800 flex justify-between items-center text-[8px]">
-              <span className="text-sand">RATE_LIMIT_ARMOR</span>
-              <span className="text-accent font-bold">500 REQ/MIN</span>
+              <span className="text-sand">ORIGIN_OFFLOAD</span>
+              <span className="text-accent font-bold">SEGMENT_CACHED (94%)</span>
             </div>
           </div>
 
           <div className="flex items-center justify-between text-[8px] font-mono text-sand/80 pt-1.5 border-t border-stone-800">
-            <span className="text-brass">EDGE ROUTING: STRICT</span>
+            <span className="text-brass">EDGE CACHE: HIT_OPTIMIZED</span>
             <span className="text-accent">ONLINE</span>
           </div>
         </motion.div>

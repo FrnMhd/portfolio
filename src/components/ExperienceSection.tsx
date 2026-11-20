@@ -8,16 +8,17 @@ export default function ExperienceSection() {
 
   const experiences = [
     {
-      title: "Full Stack / Backend Developer",
-      company: "Trogon Media Calicut",
+      title: "Backend / Full-Stack Developer",
+      company: "Trogon Media",
       period: "Jun 2025 - Present",
       type: "Full-Time",
       loc: "Calicut, IN",
       points: [
-        "Developed SaaS dashboards and web applications, LMS Systems using Laravel, CodeIgniter, and API integration.",
-        "Integrated payment gateways and CRM systems to streamline business operations.",
+        "Architect and maintain production backend modules and RESTful APIs serving 20,000+ users across educational platforms.",
+        "Engineered role-based access control (RBAC), secure payment gateway integrations, and data-driven administrative workflows.",
+        "Spearheaded database schema design, query optimization, and cross-client API contracts for web and mobile consumers.",
       ],
-      tags: ["Laravel", "Bootstrap", "API Integration"],
+      tags: ["PHP", "Laravel", "REST APIs", "MySQL", "RBAC", "Payments"],
     },
     {
       title: "Flutter Developer Intern",

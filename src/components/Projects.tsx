@@ -10,25 +10,32 @@ export default function Projects() {
 
   const projects = [
     {
-      title: "Sales Intelligence Dashboard",
-      desc: "Forecasting sales trends and business insights using Tailwind CSS, and Chart.js; backend using Express/Node.js with JWT authentication and Python (Prophet) ML.",
-      tech: ["Tailwind", "NodeJS", "Pandas", "Python"],
-      link: "https://github.com/FrnMhd/BI-Vision-sales-forecasting",
+      title: "Stream Gateway — Lightweight HLS Streaming CDN",
+      desc: "A custom Node.js reverse-proxy streaming gateway for HLS video delivery. Implemented playlist processing (.m3u8), dynamic URL rewriting, and segment caching to slash upstream origin server load and optimize media request pipelines.",
+      tech: ["Node.js", "HLS", "HTTP", "Reverse Proxy", "Caching", "REST APIs"],
+      link: "https://github.com/FrnMhd",
       num: "01",
     },
     {
-      title: "BuildTrack - Construction",
-      desc: "Platform for tracking workers, wages, and inventory at construction sites, improving site efficiency and transparency.",
-      tech: ["PHP", "MySQL", "Bootstrap"],
+      title: "TaskFlow — Asynchronous Job Processing System",
+      desc: "A robust backend concurrency engine built with Java 21 and Spring Boot. Features a multi-threaded worker pool architecture for executing background jobs, state-machine lifecycle tracking (queued, processing, failure recovery), priority queues, and containerized deployment with Docker.",
+      tech: ["Java 21", "Spring Boot", "PostgreSQL", "Docker", "Maven", "JUnit"],
       link: "https://github.com/FrnMhd",
       num: "02",
     },
     {
-      title: "Admin Dashboard and CMS",
-      desc: "A custom admin dashboard and CMS for managing the college's official website using PHP, Bootstrap, and MySQL.",
-      tech: ["PHP", "Bootstrap", "MySQL"],
-      link: "http://cuiet.info/",
+      title: "Enterprise LMS & ERP Production Platform",
+      desc: "A high-durability production platform serving 20,000+ active students and institutional users across Kerala. Architected modular backend workflows for admissions, coursework, assessments, payment gateway integrations, and granular multi-tenant role-based access control (RBAC).",
+      tech: ["PHP", "Laravel", "CodeIgniter", "MySQL", "REST APIs", "RBAC"],
+      link: "https://github.com/FrnMhd",
       num: "03",
+    },
+    {
+      title: "Bi-Vision — Predictive Sales Intelligence Platform",
+      desc: "An automated data-processing and business forecasting platform. Built ETL pipelines for cleaning and transforming high-volume transaction datasets, coupled with time-series machine learning models to generate predictive revenue trends and executive insights.",
+      tech: ["Python", "Flask", "Pandas", "Prophet ML", "Data Pipelines"],
+      link: "https://github.com/FrnMhd/BI-Vision-sales-forecasting",
+      num: "04",
     },
   ];
 

@@ -6,15 +6,15 @@ export default function AboutSection() {
   const categories = [
     {
       title: "LANGUAGES",
-      items: ["PHP", "JavaScript", "Python", "Dart", "SQL", "HTML/CSS"]
+      items: ["JavaScript", "Java", "Go", "PHP", "Python", "SQL"]
     },
     {
-      title: "FRAMEWORKS",
-      items: ["Laravel", "Next.js", "React", "Flask", "Flutter", "Tailwind"]
+      title: "BACKEND & RUNTIMES",
+      items: ["Node.js", "Spring Boot", "Laravel", "Express.js", "Next.js", "Flask"]
     },
     {
-      title: "INFRASTRUCTURE",
-      items: ["Docker", "MySQL", "MongoDB", "Firebase", "Git", "GitHub Actions"]
+      title: "INFRASTRUCTURE & DB",
+      items: ["PostgreSQL", "MySQL", "MongoDB", "Docker", "Linux VPS", "Git"]
     }
   ];
 
@@ -46,8 +46,8 @@ export default function AboutSection() {
               <div>
                 <span className="text-brass uppercase tracking-widest text-[10px] font-semibold block mb-2">{"// BACKGROUND"}</span>
                 <p>
-                  I am a software developer working at the intersection of web engineering and systems automation. 
-                  My focus is on creating logical, efficient digital architectures using clean source code and well-designed relational patterns.
+                  I am a backend-focused software engineer building resilient APIs, asynchronous job processing engines, and media streaming gateways. 
+                  Rather than being tied to any single language, I approach engineering through core system fundamentals — concurrency, data consistency, caching, and clean service decoupling.
                 </p>
               </div>
             </Reveal>
@@ -56,8 +56,8 @@ export default function AboutSection() {
               <div>
                 <span className="text-brass uppercase tracking-widest text-[10px] font-semibold block mb-2">{"// FOCUS"}</span>
                 <p>
-                  I build backends, custom CMS setups, automation scripts, and front-end architectures that prioritize speed and structure. 
-                  I avoid bloated layers in favor of clear design and clean API endpoints.
+                  My hands-on production experience spans high-traffic platforms serving 20,000+ active users. 
+                  Currently expanding across Java, Spring Boot, and Go while shipping robust Node.js and PHP/Laravel backend services.
                 </p>
               </div>
             </Reveal>

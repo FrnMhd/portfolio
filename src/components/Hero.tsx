@@ -111,10 +111,12 @@ export default function Hero() {
             className="w-full"
           >
             <p className="text-xs uppercase tracking-widest text-brass font-mono mb-6">
-              Full-Stack Systems & Automation Enthusiast            </p>
+              Backend & Distributed Systems Engineer
+            </p>
             <p className="text-sm md:text-base text-sand max-w-xl leading-relaxed mb-10 font-mono">
-              Full-stack developer bridging robust databases, payment gateways, and automated services into unified web apps.
-              Built for real-world load, maintainability, and fast shipping.
+              Language-agnostic backend engineer building high-throughput streaming gateways,
+              asynchronous job engines, and production APIs serving 20K+ users.
+              Focused on concurrency, resilient caching, and clean service architecture.
             </p>
           </motion.div>
 
@@ -158,10 +160,12 @@ export default function Hero() {
             />
             <span className="text-brass uppercase tracking-widest block mb-3 font-semibold">[CORE_SYSTEMS]</span>
             <div className="flex flex-wrap gap-x-6 gap-y-2">
-              <div>{"// NEXT.JS"}</div>
-              <div>{"// LARAVEL"}</div>
+              <div>{"// NODE.JS"}</div>
+              <div>{"// GO"}</div>
               <div>{"// PYTHON"}</div>
-              <div>{"// NODEJS"}</div>
+              <div>{"// PHP (LARAVEL)"}</div>
+              <div>{"// JAVA (SPRING)"}</div>
+              <div>{"// DOCKER"}</div>
               <div>{"// API_SYSTEMS"}</div>
             </div>
           </motion.div>
