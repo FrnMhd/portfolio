@@ -380,9 +380,9 @@ export default function ContactSection() {
             <a
               href="/raw"
               className="text-stone-400 hover:text-accent transition-colors underline underline-offset-4 decoration-stone-700"
-              title="Ultra-fast zero-bloat plain HTML version"
+              title="Fast text version"
             >
-              [ PREFER PLAIN HTML? ]
+              [ TEXT VERSION ]
             </a>
             <span>•</span>
             <span>[ ALL_RIGHTS_RESERVED ]</span>
