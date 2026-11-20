@@ -88,7 +88,7 @@ export default function ExperienceSection() {
 
         {/* Industrial Timeline Container */}
         <div className="mt-12 border-t border-stone-800 relative">
-          
+
           {/* Subtle Vertical Copper Timeline Line */}
           <div className="absolute left-6 top-8 bottom-12 w-px bg-gradient-to-b from-accent via-stone-800 to-transparent pointer-events-none hidden md:block" />
 
@@ -108,11 +108,10 @@ export default function ExperienceSection() {
                         ? `radial-gradient(500px circle at ${mousePos.x}px ${mousePos.y}px, rgba(200, 112, 64, 0.08), transparent 65%)`
                         : undefined,
                   }}
-                  className={`relative py-12 border-b border-stone-800 grid grid-cols-1 md:grid-cols-12 gap-8 items-start transition-all duration-300 px-6 ${
-                    isHovered
+                  className={`relative py-12 border-b border-stone-800 grid grid-cols-1 md:grid-cols-12 gap-8 items-start transition-all duration-300 px-6 ${isHovered
                       ? "bg-surface/25 border-accent/40 shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
                       : "hover:bg-surface/10"
-                  }`}
+                    }`}
                 >
                   {/* Tactical Reticle Lock Corner Brackets on Hover */}
                   <AnimatePresence>
@@ -166,9 +165,8 @@ export default function ExperienceSection() {
                           </>
                         ) : (
                           <span
-                            className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-                              isHovered ? "bg-accent" : "bg-brass/80"
-                            }`}
+                            className={`w-2 h-2 rounded-full transition-colors duration-200 ${isHovered ? "bg-accent" : "bg-brass/80"
+                              }`}
                           />
                         )}
                       </div>
@@ -181,7 +179,7 @@ export default function ExperienceSection() {
                       {exp.isCurrent && (
                         <span className="inline-flex items-center gap-1.5 px-2 py-0.5 border border-accent/40 bg-accent/10 text-[9px] uppercase tracking-wider text-accent font-mono font-semibold">
                           <span className="w-1 h-1 bg-accent rounded-full animate-pulse" />
-                          ACTIVE PRODUCTION
+                          ACTIVE
                         </span>
                       )}
                     </div>
@@ -220,11 +218,10 @@ export default function ExperienceSection() {
                       {exp.tags.map((tag, idx) => (
                         <span
                           key={idx}
-                          className={`px-2.5 py-1 text-[9px] font-mono uppercase tracking-wider transition-colors duration-200 ${
-                            isHovered
+                          className={`px-2.5 py-1 text-[9px] font-mono uppercase tracking-wider transition-colors duration-200 ${isHovered
                               ? "text-accent border border-accent/40 bg-accent/10"
                               : "text-brass border border-stone-800 bg-surface/30"
-                          }`}
+                            }`}
                         >
                           {tag}
                         </span>

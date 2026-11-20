@@ -4,34 +4,48 @@ import { useState } from "react";
 import Reveal from "@/components/Reveal";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Character codes for "+91 95267 12155" to prevent static HTML/crawler indexing
+const OBFUSCATED_TEL = [43, 57, 49, 32, 57, 53, 50, 54, 55, 32, 49, 50, 49, 53, 53];
+
 export default function ContactSection() {
-  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
-  const contactLinks = [
-    {
-      label: "EMAIL",
-      value: "farhanmedappil@gmail.com",
-      url: "mailto:farhanmedappil@gmail.com",
-      code: "01"
-    },
-    {
-      label: "LINKEDIN",
-      value: "linkedin.com/in/farhanmp",
-      url: "https://www.linkedin.com/in/farhanmp",
-      code: "02"
-    },
-    {
-      label: "GITHUB",
-      value: "github.com/FrnMhd",
-      url: "https://github.com/FrnMhd",
-      code: "03"
-    }
-  ];
+  // Anti-crawler Phone Reveal State
+  const [phoneRevealed, setPhoneRevealed] = useState<boolean>(false);
+  const [phoneText, setPhoneText] = useState<string>("+91 ••••• •••••");
+  const [isDecrypting, setIsDecrypting] = useState<boolean>(false);
 
-  const handleCopy = (text: string, index: number) => {
+  // Human interaction reveal with digital decryption scramble
+  const handleRevealPhone = () => {
+    if (phoneRevealed || isDecrypting) return;
+    setIsDecrypting(true);
+
+    const actualPhone = OBFUSCATED_TEL.map((c) => String.fromCharCode(c)).join("");
+    const chars = ["#", "8", "X", "%", "9", "2", "@", "&", "4", "7"];
+    let iterations = 0;
+
+    const interval = setInterval(() => {
+      iterations++;
+      if (iterations < 6) {
+        // Scramble random digital numbers
+        const scrambled = actualPhone
+          .split("")
+          .map((ch) => (ch === " " || ch === "+" ? ch : chars[Math.floor(Math.random() * chars.length)]))
+          .join("");
+        setPhoneText(scrambled);
+      } else {
+        clearInterval(interval);
+        setPhoneText(actualPhone);
+        setPhoneRevealed(true);
+        setIsDecrypting(false);
+      }
+    }, 55);
+  };
+
+  const handleCopy = (text: string, key: string) => {
     navigator.clipboard.writeText(text);
-    setCopiedIndex(index);
-    setTimeout(() => setCopiedIndex(null), 2500);
+    setCopiedKey(key);
+    setTimeout(() => setCopiedKey(null), 2500);
   };
 
   return (
@@ -98,86 +112,139 @@ export default function ContactSection() {
             {/* Right side contact links (5 cols) */}
             <div className="lg:col-span-5 font-mono text-xs w-full">
               <div className="border-t border-stone-800 divide-y divide-stone-800">
-                {contactLinks.map((link, idx) => {
-                  const isCopied = copiedIndex === idx;
 
-                  return (
-                    <div
-                      key={idx}
-                      className="py-5 flex justify-between items-center group hover:bg-surface/20 px-3 transition-colors duration-300 relative"
+                {/* 01. EMAIL */}
+                <div className="py-5 flex justify-between items-center group hover:bg-surface/20 px-3 transition-colors duration-300 relative">
+                  <div className="flex flex-col">
+                    <span className="text-brass uppercase tracking-widest text-[10px] font-semibold flex items-center gap-2">
+                      <span className="text-accent">01.</span>
+                      EMAIL
+                    </span>
+                    <a
+                      href="mailto:farhanmedappil@gmail.com"
+                      className="text-ivory group-hover:text-accent font-mono text-xs transition-colors duration-300 mt-1"
                     >
-                      <div className="flex flex-col">
-                        <span className="text-brass uppercase tracking-widest text-[10px] font-semibold flex items-center gap-2">
-                          <span className="text-accent">{link.code}.</span>
-                          {link.label}
-                        </span>
-                        <a
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-ivory group-hover:text-accent font-mono text-xs transition-colors duration-300 mt-1"
-                        >
-                          {link.value}
-                        </a>
-                      </div>
+                      farhanmedappil@gmail.com
+                    </a>
+                  </div>
 
-                      <div className="flex items-center gap-3">
-                        {/* Animated Reticle Copier Button */}
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => handleCopy("farhanmedappil@gmail.com", "email")}
+                      className={`relative text-[9px] uppercase tracking-wider px-2.5 py-1.5 transition-all duration-300 font-mono flex items-center gap-1.5 ${
+                        copiedKey === "email"
+                          ? "border border-emerald-500/70 bg-emerald-500/10 text-emerald-400 font-semibold shadow-[0_0_15px_rgba(16,185,129,0.25)]"
+                          : "border border-stone-800 text-stone-500 hover:text-ivory hover:border-accent/60 bg-surface/30"
+                      }`}
+                    >
+                      <AnimatePresence>
+                        {copiedKey === "email" && (
+                          <>
+                            <span className="absolute -top-1 -left-1 text-emerald-400 text-[8px] pointer-events-none">┌</span>
+                            <span className="absolute -top-1 -right-1 text-emerald-400 text-[8px] pointer-events-none">┐</span>
+                            <span className="absolute -bottom-1 -left-1 text-emerald-400 text-[8px] pointer-events-none">└</span>
+                            <span className="absolute -bottom-1 -right-1 text-emerald-400 text-[8px] pointer-events-none">┘</span>
+                          </>
+                        )}
+                      </AnimatePresence>
+
+                      <AnimatePresence mode="wait">
+                        {copiedKey === "email" ? (
+                          <motion.span
+                            key="copied"
+                            initial={{ opacity: 0, y: -3 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 3 }}
+                            className="flex items-center gap-1"
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            <span>COPIED!</span>
+                          </motion.span>
+                        ) : (
+                          <motion.span
+                            key="copy"
+                            initial={{ opacity: 0, y: 3 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -3 }}
+                            className="flex items-center gap-1"
+                          >
+                            <span>COPY</span>
+                            <span className="opacity-60">⎘</span>
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
+                    </button>
+
+                    <a
+                      href="mailto:farhanmedappil@gmail.com"
+                      className="text-accent group-hover:translate-x-1.5 transition-transform"
+                      aria-label="Send email"
+                    >
+                      →
+                    </a>
+                  </div>
+                </div>
+
+                {/* 02. DIRECT PHONE (Anti-Crawler Human Verification Reveal) */}
+                <div className="py-5 flex justify-between items-center group hover:bg-surface/20 px-3 transition-colors duration-300 relative">
+                  <div className="flex flex-col">
+                    <span className="text-brass uppercase tracking-widest text-[10px] font-semibold flex items-center gap-2">
+                      <span className="text-accent">02.</span>
+                      DIRECT_PHONE
+                      {!phoneRevealed && (
+                        <span className="text-[8px] text-stone-500 border border-stone-800 px-1 py-0.2 uppercase font-normal">
+                          PROTECTED
+                        </span>
+                      )}
+                    </span>
+
+                    {phoneRevealed ? (
+                      <a
+                        href={`tel:${phoneText.replace(/\s+/g, "")}`}
+                        className="text-ivory group-hover:text-accent font-mono text-xs transition-colors duration-300 mt-1 flex items-center gap-1.5"
+                      >
+                        <span>{phoneText}</span>
+                      </a>
+                    ) : (
+                      <span className="text-sand/70 font-mono text-xs mt-1 select-none flex items-center gap-2">
+                        <span>{phoneText}</span>
+                        {isDecrypting && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
+                        )}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    {phoneRevealed ? (
+                      /* Revealed state: Copy Button + Direct Call Arrow */
+                      <>
                         <button
-                          onClick={() => handleCopy(link.value, idx)}
+                          onClick={() => handleCopy(phoneText, "phone")}
                           className={`relative text-[9px] uppercase tracking-wider px-2.5 py-1.5 transition-all duration-300 font-mono flex items-center gap-1.5 ${
-                            isCopied
+                            copiedKey === "phone"
                               ? "border border-emerald-500/70 bg-emerald-500/10 text-emerald-400 font-semibold shadow-[0_0_15px_rgba(16,185,129,0.25)]"
                               : "border border-stone-800 text-stone-500 hover:text-ivory hover:border-accent/60 bg-surface/30"
                           }`}
                         >
-                          {/* Corner Reticle Ticks when copied */}
                           <AnimatePresence>
-                            {isCopied && (
+                            {copiedKey === "phone" && (
                               <>
-                                <motion.span
-                                  initial={{ opacity: 0, scale: 0.5 }}
-                                  animate={{ opacity: 1, scale: 1 }}
-                                  exit={{ opacity: 0 }}
-                                  className="absolute -top-1 -left-1 text-emerald-400 text-[8px] pointer-events-none"
-                                >
-                                  ┌
-                                </motion.span>
-                                <motion.span
-                                  initial={{ opacity: 0, scale: 0.5 }}
-                                  animate={{ opacity: 1, scale: 1 }}
-                                  exit={{ opacity: 0 }}
-                                  className="absolute -top-1 -right-1 text-emerald-400 text-[8px] pointer-events-none"
-                                >
-                                  ┐
-                                </motion.span>
-                                <motion.span
-                                  initial={{ opacity: 0, scale: 0.5 }}
-                                  animate={{ opacity: 1, scale: 1 }}
-                                  exit={{ opacity: 0 }}
-                                  className="absolute -bottom-1 -left-1 text-emerald-400 text-[8px] pointer-events-none"
-                                >
-                                  └
-                                </motion.span>
-                                <motion.span
-                                  initial={{ opacity: 0, scale: 0.5 }}
-                                  animate={{ opacity: 1, scale: 1 }}
-                                  exit={{ opacity: 0 }}
-                                  className="absolute -bottom-1 -right-1 text-emerald-400 text-[8px] pointer-events-none"
-                                >
-                                  ┘
-                                </motion.span>
+                                <span className="absolute -top-1 -left-1 text-emerald-400 text-[8px] pointer-events-none">┌</span>
+                                <span className="absolute -top-1 -right-1 text-emerald-400 text-[8px] pointer-events-none">┐</span>
+                                <span className="absolute -bottom-1 -left-1 text-emerald-400 text-[8px] pointer-events-none">└</span>
+                                <span className="absolute -bottom-1 -right-1 text-emerald-400 text-[8px] pointer-events-none">┘</span>
                               </>
                             )}
                           </AnimatePresence>
 
                           <AnimatePresence mode="wait">
-                            {isCopied ? (
+                            {copiedKey === "phone" ? (
                               <motion.span
-                                key="copied"
-                                initial={{ opacity: 0, y: -4 }}
+                                key="copied-phone"
+                                initial={{ opacity: 0, y: -3 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: 4 }}
+                                exit={{ opacity: 0, y: 3 }}
                                 className="flex items-center gap-1"
                               >
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -185,10 +252,10 @@ export default function ContactSection() {
                               </motion.span>
                             ) : (
                               <motion.span
-                                key="copy"
-                                initial={{ opacity: 0, y: 4 }}
+                                key="copy-phone"
+                                initial={{ opacity: 0, y: 3 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -4 }}
+                                exit={{ opacity: 0, y: -3 }}
                                 className="flex items-center gap-1"
                               >
                                 <span>COPY</span>
@@ -199,18 +266,178 @@ export default function ContactSection() {
                         </button>
 
                         <a
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          href={`tel:${phoneText.replace(/\s+/g, "")}`}
                           className="text-accent group-hover:translate-x-1.5 transition-transform"
-                          aria-label={`Open ${link.label}`}
+                          aria-label="Direct Call"
                         >
                           →
                         </a>
-                      </div>
-                    </div>
-                  );
-                })}
+                      </>
+                    ) : (
+                      /* Dormant Protected State: Click to Reveal */
+                      <button
+                        onClick={handleRevealPhone}
+                        disabled={isDecrypting}
+                        className="relative text-[9px] uppercase tracking-wider px-3 py-1.5 border border-accent/60 bg-accent/10 hover:bg-accent hover:text-background text-accent font-semibold transition-all duration-300 font-mono flex items-center gap-1.5 shadow-[0_0_12px_rgba(200,112,64,0.15)] cursor-pointer"
+                      >
+                        <span>{isDecrypting ? "DECRYPTING..." : "[ REVEAL 👁 ]"}</span>
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* 03. LINKEDIN */}
+                <div className="py-5 flex justify-between items-center group hover:bg-surface/20 px-3 transition-colors duration-300 relative">
+                  <div className="flex flex-col">
+                    <span className="text-brass uppercase tracking-widest text-[10px] font-semibold flex items-center gap-2">
+                      <span className="text-accent">03.</span>
+                      LINKEDIN
+                    </span>
+                    <a
+                      href="https://www.linkedin.com/in/farhanmp"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-ivory group-hover:text-accent font-mono text-xs transition-colors duration-300 mt-1"
+                    >
+                      linkedin.com/in/farhanmp
+                    </a>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => handleCopy("https://www.linkedin.com/in/farhanmp", "linkedin")}
+                      className={`relative text-[9px] uppercase tracking-wider px-2.5 py-1.5 transition-all duration-300 font-mono flex items-center gap-1.5 ${
+                        copiedKey === "linkedin"
+                          ? "border border-emerald-500/70 bg-emerald-500/10 text-emerald-400 font-semibold shadow-[0_0_15px_rgba(16,185,129,0.25)]"
+                          : "border border-stone-800 text-stone-500 hover:text-ivory hover:border-accent/60 bg-surface/30"
+                      }`}
+                    >
+                      <AnimatePresence>
+                        {copiedKey === "linkedin" && (
+                          <>
+                            <span className="absolute -top-1 -left-1 text-emerald-400 text-[8px] pointer-events-none">┌</span>
+                            <span className="absolute -top-1 -right-1 text-emerald-400 text-[8px] pointer-events-none">┐</span>
+                            <span className="absolute -bottom-1 -left-1 text-emerald-400 text-[8px] pointer-events-none">└</span>
+                            <span className="absolute -bottom-1 -right-1 text-emerald-400 text-[8px] pointer-events-none">┘</span>
+                          </>
+                        )}
+                      </AnimatePresence>
+
+                      <AnimatePresence mode="wait">
+                        {copiedKey === "linkedin" ? (
+                          <motion.span
+                            key="copied-linkedin"
+                            initial={{ opacity: 0, y: -3 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 3 }}
+                            className="flex items-center gap-1"
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            <span>COPIED!</span>
+                          </motion.span>
+                        ) : (
+                          <motion.span
+                            key="copy-linkedin"
+                            initial={{ opacity: 0, y: 3 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -3 }}
+                            className="flex items-center gap-1"
+                          >
+                            <span>COPY</span>
+                            <span className="opacity-60">⎘</span>
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
+                    </button>
+
+                    <a
+                      href="https://www.linkedin.com/in/farhanmp"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent group-hover:translate-x-1.5 transition-transform"
+                      aria-label="Open LinkedIn"
+                    >
+                      →
+                    </a>
+                  </div>
+                </div>
+
+                {/* 04. GITHUB */}
+                <div className="py-5 flex justify-between items-center group hover:bg-surface/20 px-3 transition-colors duration-300 relative">
+                  <div className="flex flex-col">
+                    <span className="text-brass uppercase tracking-widest text-[10px] font-semibold flex items-center gap-2">
+                      <span className="text-accent">04.</span>
+                      GITHUB
+                    </span>
+                    <a
+                      href="https://github.com/FrnMhd"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-ivory group-hover:text-accent font-mono text-xs transition-colors duration-300 mt-1"
+                    >
+                      github.com/FrnMhd
+                    </a>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => handleCopy("https://github.com/FrnMhd", "github")}
+                      className={`relative text-[9px] uppercase tracking-wider px-2.5 py-1.5 transition-all duration-300 font-mono flex items-center gap-1.5 ${
+                        copiedKey === "github"
+                          ? "border border-emerald-500/70 bg-emerald-500/10 text-emerald-400 font-semibold shadow-[0_0_15px_rgba(16,185,129,0.25)]"
+                          : "border border-stone-800 text-stone-500 hover:text-ivory hover:border-accent/60 bg-surface/30"
+                      }`}
+                    >
+                      <AnimatePresence>
+                        {copiedKey === "github" && (
+                          <>
+                            <span className="absolute -top-1 -left-1 text-emerald-400 text-[8px] pointer-events-none">┌</span>
+                            <span className="absolute -top-1 -right-1 text-emerald-400 text-[8px] pointer-events-none">┐</span>
+                            <span className="absolute -bottom-1 -left-1 text-emerald-400 text-[8px] pointer-events-none">└</span>
+                            <span className="absolute -bottom-1 -right-1 text-emerald-400 text-[8px] pointer-events-none">┘</span>
+                          </>
+                        )}
+                      </AnimatePresence>
+
+                      <AnimatePresence mode="wait">
+                        {copiedKey === "github" ? (
+                          <motion.span
+                            key="copied-github"
+                            initial={{ opacity: 0, y: -3 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 3 }}
+                            className="flex items-center gap-1"
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            <span>COPIED!</span>
+                          </motion.span>
+                        ) : (
+                          <motion.span
+                            key="copy-github"
+                            initial={{ opacity: 0, y: 3 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -3 }}
+                            className="flex items-center gap-1"
+                          >
+                            <span>COPY</span>
+                            <span className="opacity-60">⎘</span>
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
+                    </button>
+
+                    <a
+                      href="https://github.com/FrnMhd"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent group-hover:translate-x-1.5 transition-transform"
+                      aria-label="Open GitHub"
+                    >
+                      →
+                    </a>
+                  </div>
+                </div>
+
               </div>
             </div>
 
