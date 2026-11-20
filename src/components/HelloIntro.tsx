@@ -34,6 +34,7 @@ export default function HelloIntro() {
       setProgress(0);
       setGreetingIndex(0);
       document.body.style.overflow = "hidden";
+      window.dispatchEvent(new CustomEvent("intro-start"));
     };
 
     if (!hasSeen) {
@@ -106,6 +107,7 @@ export default function HelloIntro() {
   const triggerExit = () => {
     setIsClosing(true);
     sessionStorage.setItem("hasSeenHelloIntro", "true");
+    window.dispatchEvent(new CustomEvent("intro-curtain-open"));
     setTimeout(() => {
       setVisible(false);
       document.body.style.overflow = "";

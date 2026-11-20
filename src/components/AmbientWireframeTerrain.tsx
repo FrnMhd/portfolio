@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useMemo } from "react";
+import React, { useRef, useMemo, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useTheme } from "@/context/ThemeContext";
@@ -20,13 +20,14 @@ if (typeof window !== "undefined") {
 }
 
 // ============================================================================
-// INTERSTELLAR SPACETIME CURVATURE & TIDAL WAVE MESH
-// Inspired by Kip Thorne's gravitational physics & Miller's planetary wave swells
+// INTERSTELLAR SPACETIME CURVATURE & GRAVITATIONAL GENESIS WAVE
 // ============================================================================
 function InterstellarSpacetimeLattice({ isDark }: { isDark: boolean }) {
-  const meshRef = useRef<THREE.Mesh>(null);
+  const meshRef = useRef<THREE.Group>(null);
+  const wireMatRef = useRef<THREE.MeshBasicMaterial>(null);
+  const surfaceMatRef = useRef<THREE.MeshStandardMaterial>(null);
 
-  // Mesh resolution & dimensions: broad cinematic horizon
+  // Mesh resolution & dimensions
   const width = 24;
   const height = 18;
   const widthSegments = 88;
@@ -43,13 +44,77 @@ function InterstellarSpacetimeLattice({ isDark }: { isDark: boolean }) {
     return new Float32Array(geom.attributes.position.array);
   }, [geom]);
 
-  // Smooth mouse target interpolation (celestial gravitational center)
+  // Mouse target interpolation
   const currentMouse = useRef({ x: 0, y: 0 });
+
+  // Genesis Animation State (Triggered when hello intro opens or on load)
+  const genesisStartTime = useRef<number | null>(null);
+  const genesisTriggered = useRef<boolean>(false);
+
+  useEffect(() => {
+    const startGenesis = () => {
+      genesisTriggered.current = true;
+      genesisStartTime.current = null; // Will capture next frame's clock time
+    };
+
+    const resetGenesis = () => {
+      genesisTriggered.current = false;
+      genesisStartTime.current = null;
+    };
+
+    // Check if intro has already run in this session
+    const hasSeen =
+      typeof window !== "undefined" &&
+      sessionStorage.getItem("hasSeenHelloIntro") === "true";
+
+    if (hasSeen) {
+      // Start genesis immediately on mount
+      const timer = setTimeout(startGenesis, 200);
+      return () => clearTimeout(timer);
+    } else {
+      // Wait for intro curtain to open
+      window.addEventListener("intro-curtain-open", startGenesis);
+      window.addEventListener("intro-start", resetGenesis);
+      window.addEventListener("replay-hello-intro", resetGenesis);
+
+      // Safety fallback: if intro event wasn't caught, start after 3.6s
+      const fallbackTimer = setTimeout(startGenesis, 3600);
+
+      return () => {
+        window.removeEventListener("intro-curtain-open", startGenesis);
+        window.removeEventListener("intro-start", resetGenesis);
+        window.removeEventListener("replay-hello-intro", resetGenesis);
+        clearTimeout(fallbackTimer);
+      };
+    }
+  }, []);
+
+  const targetWireOpacity = isDark ? 0.42 : 0.28;
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
 
-    // Lerp mouse coordinates smoothly (gentle celestial inertia)
+    // 1. Manage Genesis Timing
+    if (genesisTriggered.current && genesisStartTime.current === null) {
+      genesisStartTime.current = time;
+    }
+
+    let genesisProgress = 1.0;
+    let waveRadius = 999.0;
+
+    if (!genesisTriggered.current) {
+      genesisProgress = 0.0;
+      waveRadius = 0.0;
+    } else if (genesisStartTime.current !== null) {
+      const elapsed = time - genesisStartTime.current;
+      const duration = 2.4; // 2.4s cinematic genesis wave
+      const rawProgress = Math.min(Math.max(elapsed / duration, 0), 1);
+      // Decelerating cubic-bezier curve (fast initial wave, gentle majestic settle)
+      genesisProgress = 1.0 - Math.pow(1.0 - rawProgress, 3.2);
+      waveRadius = genesisProgress * 24.0; // spans across entire 24x18 grid
+    }
+
+    // 2. Smoothly track mouse
     currentMouse.current.x = THREE.MathUtils.lerp(
       currentMouse.current.x,
       mouseState.x * 7.5,
@@ -66,37 +131,85 @@ function InterstellarSpacetimeLattice({ isDark }: { isDark: boolean }) {
     const targetX = currentMouse.current.x;
     const targetY = currentMouse.current.y;
 
+    // Center of the Genesis shockwave: Right-Center of hero
+    const originX = 2.2;
+    const originY = -0.6;
+
     for (let i = 0; i < count; i++) {
       const uX = basePositions[i * 3];
       const uY = basePositions[i * 3 + 1];
 
-      // 1. Miller's Colossal Tidal Swell (slow, majestic harmonic waves)
+      if (genesisProgress <= 0.001) {
+        // Dormant flat grid before curtain opens
+        pos.setZ(i, 0);
+        continue;
+      }
+
+      // Distance from Genesis shockwave origin
+      const dGenX = uX - originX;
+      const dGenY = uY - originY;
+      const distFromOrigin = Math.sqrt(dGenX * dGenX + dGenY * dGenY);
+      const delta = waveRadius - distFromOrigin;
+
+      // If wavefront has not reached this vertex yet, it remains flat
+      if (delta < 0 && genesisProgress < 1.0) {
+        pos.setZ(i, 0);
+        continue;
+      }
+
+      // 1. Ambient Miller's Tidal Harmonic Waves
       const swell1 = Math.sin(uX * 0.32 + time * 0.42) * 0.52;
       const swell2 = Math.cos(uY * 0.28 + time * 0.34) * 0.44;
       const tidalCross = Math.sin((uX * 0.4 - uY * 0.3) + time * 0.55) * 0.2;
 
-      // 2. Gravitational Singularity / Spacetime Curvature (General Relativity)
-      // The cursor curves the spacetime fabric inward like a celestial gravitational well
+      // 2. Gravitational Singularity / Spacetime Curvature
       const dx = uX - targetX;
       const dy = uY - targetY;
-      const dist = Math.sqrt(dx * dx + dy * dy);
+      const distMouse = Math.sqrt(dx * dx + dy * dy);
 
-      // Smooth gravitational depression (Einstein rubber-sheet spacetime)
-      const gravityWell = -1.5 / (1.0 + Math.pow(dist * 0.7, 1.8));
-
-      // Propagating relativistic gravitational waves (LIGO / Thorne ripple)
+      const gravityWell = -1.5 / (1.0 + Math.pow(distMouse * 0.7, 1.8));
       const gravWaves =
-        Math.sin(dist * 1.5 - time * 1.8) * Math.exp(-dist * 0.32) * 0.35;
+        Math.sin(distMouse * 1.5 - time * 1.8) *
+        Math.exp(-distMouse * 0.32) *
+        0.35;
 
-      const z = swell1 + swell2 + tidalCross + gravityWell + gravWaves;
-      pos.setZ(i, z);
+      const ambientZ = swell1 + swell2 + tidalCross + gravityWell + gravWaves;
+
+      if (genesisProgress < 1.0 && delta < 3.4) {
+        // Active Genesis Wavefront Pulse
+        const pulse = Math.sin((delta / 3.4) * Math.PI) * 0.95; // energetic crest
+        const settleRatio = delta / 3.4;
+        pos.setZ(i, ambientZ * settleRatio + pulse);
+      } else {
+        // Fully materialized into active spacetime
+        pos.setZ(i, ambientZ);
+      }
     }
 
     pos.needsUpdate = true;
     geom.computeVertexNormals();
 
+    // 3. Dynamic Opacity & Spatial Tilt during Genesis
+    if (wireMatRef.current) {
+      wireMatRef.current.opacity =
+        Math.min(1.0, genesisProgress * 1.4) * targetWireOpacity;
+    }
+
+    if (surfaceMatRef.current) {
+      surfaceMatRef.current.opacity = Math.min(1.0, genesisProgress * 1.2);
+    }
+
     if (meshRef.current) {
-      // Slow, orbital celestial pitch
+      // Perspective pitch settles into position as wave unfolds
+      const rotX = THREE.MathUtils.lerp(
+        -Math.PI / 2.18,
+        -Math.PI / 2.32,
+        genesisProgress
+      );
+      const posZ = THREE.MathUtils.lerp(-2.3, -1.6, genesisProgress);
+
+      meshRef.current.rotation.x = rotX;
+      meshRef.current.position.z = posZ;
       meshRef.current.rotation.z = 0.18 + Math.sin(time * 0.08) * 0.018;
     }
   });
@@ -110,23 +223,27 @@ function InterstellarSpacetimeLattice({ isDark }: { isDark: boolean }) {
       position={[2.2, -0.9, -1.6]}
       rotation={[-Math.PI / 2.32, 0, 0.18]}
     >
-      {/* 1. Underlying Dark Matter Surface (Catches Gargantua accretion specular glints) */}
+      {/* 1. Underlying Dark Matter Surface */}
       <mesh geometry={geom}>
         <meshStandardMaterial
+          ref={surfaceMatRef}
           color={surfaceColor}
           metalness={isDark ? 0.9 : 0.2}
           roughness={isDark ? 0.36 : 0.55}
           side={THREE.DoubleSide}
+          transparent
+          opacity={0}
         />
       </mesh>
 
       {/* 2. Overlaid Spacetime Geodesic Grid */}
       <mesh geometry={geom} position={[0, 0, 0.015]}>
         <meshBasicMaterial
+          ref={wireMatRef}
           color={wireColor}
           wireframe
           transparent
-          opacity={isDark ? 0.42 : 0.28}
+          opacity={0}
         />
       </mesh>
     </group>
@@ -135,7 +252,6 @@ function InterstellarSpacetimeLattice({ isDark }: { isDark: boolean }) {
 
 // ============================================================================
 // MAIN COMPONENT: FULL-BLEED INTERSTELLAR SPACETIME TERRAIN
-// Pure, crisp, high-precision geometry without boxy particle billboards
 // ============================================================================
 export default function AmbientWireframeTerrain() {
   const { theme } = useTheme();
@@ -149,7 +265,7 @@ export default function AmbientWireframeTerrain() {
         gl={{ antialias: true, alpha: true }}
         dpr={[1, 1.5]}
       >
-        {/* Deep Space Fog: Seamlessly dissolves the spacetime lattice into the background */}
+        {/* Deep Space Fog */}
         <fog attach="fog" args={[fogColor, 4.2, 14.0]} />
 
         {/* Ambient Void Light */}
@@ -176,7 +292,7 @@ export default function AmbientWireframeTerrain() {
           color="#c2a678"
         />
 
-        {/* Spacetime Lattice Mesh */}
+        {/* Spacetime Lattice Mesh with Gravitational Genesis Wave */}
         <InterstellarSpacetimeLattice isDark={isDark} />
       </Canvas>
     </div>
