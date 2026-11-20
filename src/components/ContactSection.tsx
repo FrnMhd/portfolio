@@ -374,8 +374,16 @@ export default function ContactSection() {
           <p>
             &copy; {new Date().getFullYear()} Farhan Medappil.
           </p>
-          <div className="flex items-center gap-4 uppercase tracking-widest text-stone-600">
+          <div className="flex items-center gap-4 uppercase tracking-widest text-stone-600 flex-wrap justify-center">
             <span>[ SYSTEM_ONLINE ]</span>
+            <span>•</span>
+            <a
+              href="/raw"
+              className="text-stone-400 hover:text-accent transition-colors underline underline-offset-4 decoration-stone-700"
+              title="Ultra-fast zero-bloat plain HTML version"
+            >
+              [ PREFER PLAIN HTML? ]
+            </a>
             <span>•</span>
             <span>[ ALL_RIGHTS_RESERVED ]</span>
           </div>
