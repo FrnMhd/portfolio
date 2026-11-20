@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Reveal from "@/components/Reveal";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ContactSection() {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
@@ -30,7 +31,7 @@ export default function ContactSection() {
   const handleCopy = (text: string, index: number) => {
     navigator.clipboard.writeText(text);
     setCopiedIndex(index);
-    setTimeout(() => setCopiedIndex(null), 2000);
+    setTimeout(() => setCopiedIndex(null), 2500);
   };
 
   return (
@@ -68,7 +69,7 @@ export default function ContactSection() {
                 Feel free to establish communication through the endpoints provided here.
               </p>
 
-              {/* Tactical Status Panel */}
+              {/* Status Panel */}
               <div className="relative border border-accent/40 bg-surface/20 p-8 w-full max-w-xl shadow-[0_0_20px_rgba(200,112,64,0.08)]">
                 {/* Corner Crosshair Reticles */}
                 <span className="absolute top-2 left-2 text-accent text-xs">┌</span>
@@ -97,45 +98,119 @@ export default function ContactSection() {
             {/* Right side contact links (5 cols) */}
             <div className="lg:col-span-5 font-mono text-xs w-full">
               <div className="border-t border-stone-800 divide-y divide-stone-800">
-                {contactLinks.map((link, idx) => (
-                  <div
-                    key={idx}
-                    className="py-5 flex justify-between items-center group hover:bg-surface/20 px-3 transition-colors duration-300 relative"
-                  >
-                    <div className="flex flex-col">
-                      <span className="text-brass uppercase tracking-widest text-[10px] font-semibold flex items-center gap-2">
-                        <span className="text-accent">{link.code}.</span>
-                        {link.label}
-                      </span>
-                      <a
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-ivory group-hover:text-accent font-mono text-xs transition-colors duration-300 mt-1"
-                      >
-                        {link.value}
-                      </a>
-                    </div>
+                {contactLinks.map((link, idx) => {
+                  const isCopied = copiedIndex === idx;
 
-                    <div className="flex items-center gap-3">
-                      <button
-                        onClick={() => handleCopy(link.value, idx)}
-                        className="text-[9px] uppercase tracking-wider text-stone-500 hover:text-brass border border-stone-800 px-2 py-1 transition-colors"
-                      >
-                        {copiedIndex === idx ? "[ COPIED! ]" : "[ COPY ]"}
-                      </button>
+                  return (
+                    <div
+                      key={idx}
+                      className="py-5 flex justify-between items-center group hover:bg-surface/20 px-3 transition-colors duration-300 relative"
+                    >
+                      <div className="flex flex-col">
+                        <span className="text-brass uppercase tracking-widest text-[10px] font-semibold flex items-center gap-2">
+                          <span className="text-accent">{link.code}.</span>
+                          {link.label}
+                        </span>
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-ivory group-hover:text-accent font-mono text-xs transition-colors duration-300 mt-1"
+                        >
+                          {link.value}
+                        </a>
+                      </div>
 
-                      <a
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-accent group-hover:translate-x-1.5 transition-transform"
-                      >
-                        →
-                      </a>
+                      <div className="flex items-center gap-3">
+                        {/* Animated Reticle Copier Button */}
+                        <button
+                          onClick={() => handleCopy(link.value, idx)}
+                          className={`relative text-[9px] uppercase tracking-wider px-2.5 py-1.5 transition-all duration-300 font-mono flex items-center gap-1.5 ${
+                            isCopied
+                              ? "border border-emerald-500/70 bg-emerald-500/10 text-emerald-400 font-semibold shadow-[0_0_15px_rgba(16,185,129,0.25)]"
+                              : "border border-stone-800 text-stone-500 hover:text-ivory hover:border-accent/60 bg-surface/30"
+                          }`}
+                        >
+                          {/* Corner Reticle Ticks when copied */}
+                          <AnimatePresence>
+                            {isCopied && (
+                              <>
+                                <motion.span
+                                  initial={{ opacity: 0, scale: 0.5 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  exit={{ opacity: 0 }}
+                                  className="absolute -top-1 -left-1 text-emerald-400 text-[8px] pointer-events-none"
+                                >
+                                  ┌
+                                </motion.span>
+                                <motion.span
+                                  initial={{ opacity: 0, scale: 0.5 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  exit={{ opacity: 0 }}
+                                  className="absolute -top-1 -right-1 text-emerald-400 text-[8px] pointer-events-none"
+                                >
+                                  ┐
+                                </motion.span>
+                                <motion.span
+                                  initial={{ opacity: 0, scale: 0.5 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  exit={{ opacity: 0 }}
+                                  className="absolute -bottom-1 -left-1 text-emerald-400 text-[8px] pointer-events-none"
+                                >
+                                  └
+                                </motion.span>
+                                <motion.span
+                                  initial={{ opacity: 0, scale: 0.5 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  exit={{ opacity: 0 }}
+                                  className="absolute -bottom-1 -right-1 text-emerald-400 text-[8px] pointer-events-none"
+                                >
+                                  ┘
+                                </motion.span>
+                              </>
+                            )}
+                          </AnimatePresence>
+
+                          <AnimatePresence mode="wait">
+                            {isCopied ? (
+                              <motion.span
+                                key="copied"
+                                initial={{ opacity: 0, y: -4 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 4 }}
+                                className="flex items-center gap-1"
+                              >
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                                <span>COPIED!</span>
+                              </motion.span>
+                            ) : (
+                              <motion.span
+                                key="copy"
+                                initial={{ opacity: 0, y: 4 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -4 }}
+                                className="flex items-center gap-1"
+                              >
+                                <span>COPY</span>
+                                <span className="opacity-60">⎘</span>
+                              </motion.span>
+                            )}
+                          </AnimatePresence>
+                        </button>
+
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-accent group-hover:translate-x-1.5 transition-transform"
+                          aria-label={`Open ${link.label}`}
+                        >
+                          →
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
@@ -144,7 +219,7 @@ export default function ContactSection() {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Global Minimalist Architectural Footer */}
       <footer className="py-12 bg-background border-t border-stone-850 text-center font-mono text-[10px] text-stone-500">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p>

@@ -181,7 +181,7 @@ export default function HelloIntro() {
           {/* Corner Crosshairs (+) & Blueprint Labels */}
           <div className="absolute top-6 left-6 flex items-center gap-2 font-mono text-[9px] text-stone-500 uppercase tracking-widest">
             <span className="text-accent">+</span>
-            <span>SYS_INIT // FARHAN_M_PORTFOLIO</span>
+            <span>SYS_INIT</span>
           </div>
 
           <div className="absolute top-6 right-6 flex items-center gap-4">
@@ -197,7 +197,8 @@ export default function HelloIntro() {
           </div>
 
           <div className="absolute bottom-6 left-6 font-mono text-[9px] text-stone-500 uppercase tracking-widest">
-            <span>ARCHITECTURAL_STUDIO // 2026</span>
+            {/* <span>ARCHITECTURAL_STUDIO // 2026</span> */}
+            <span>FARHAN M // 2026</span>
           </div>
 
           <div className="absolute bottom-6 right-6 flex items-center gap-3 font-mono text-[10px] text-sand">
@@ -207,7 +208,7 @@ export default function HelloIntro() {
 
           {/* Central Main Stage: Official Apple SF-Hello Vector Stroke Drawing + Multilingual Greetings */}
           <div className="flex-1 flex flex-col items-center justify-center relative">
-            
+
             {/* Architectural Background Grid Cross & Orbit Circle */}
             <div className="absolute w-[340px] sm:w-[560px] h-[340px] sm:h-[560px] border border-stone-850/50 rounded-full pointer-events-none flex items-center justify-center">
               <div className="w-[1px] h-full bg-stone-850/40" />

@@ -455,6 +455,20 @@ export default function ScrollStory({ customVisual }: ScrollStoryProps) {
   // Scrubbed HUD vertical progress line height (0% to 100%)
   const railProgressScaleY = useTransform(smoothProgress, [0, 1], [0, 1]);
 
+  // Smooth click-to-jump into specific architectural stage
+  const scrollToStage = (stageIdx: number) => {
+    if (!containerRef.current) return;
+    const targets = [0.08, 0.35, 0.62, 0.88];
+    const targetProgress = targets[stageIdx];
+    const rect = containerRef.current.getBoundingClientRect();
+    const containerTop = window.scrollY + rect.top;
+    const totalScrollableDistance =
+      containerRef.current.offsetHeight - window.innerHeight;
+    const targetScrollY =
+      containerTop + totalScrollableDistance * targetProgress;
+    window.scrollTo({ top: targetScrollY, behavior: "smooth" });
+  };
+
   // ==========================================================================
   // ACCESSIBILITY: PREFERS REDUCED MOTION
   // ==========================================================================
@@ -538,12 +552,41 @@ export default function ScrollStory({ customVisual }: ScrollStoryProps) {
             </h2>
           </div>
 
-          {/* Tactical Stage Counter HUD */}
-          <div className="flex items-center gap-3 font-mono text-xs">
-            <span className="hidden sm:inline text-sand uppercase text-[10px] tracking-widest">
-              PHASE:
-            </span>
-            <div className="px-3 py-1 bg-surface border border-stone-800 text-accent font-semibold tracking-widest text-[11px] flex items-center">
+          {/* Tactical Stage Navigation HUD & Interactive Jump Pills */}
+          <div className="flex items-center gap-2 sm:gap-4 font-mono text-xs">
+            {/* Interactive Stage Jump Pills */}
+            <div className="hidden md:flex items-center gap-1 p-1 bg-surface/50 border border-stone-850 backdrop-blur-sm">
+              {[
+                { num: "01", name: "SPEC", opacity: activeStage0 },
+                { num: "02", name: "TIERS", opacity: activeStage1 },
+                { num: "03", name: "CONCURRENCY", opacity: activeStage2 },
+                { num: "04", name: "RELEASE", opacity: activeStage3 },
+              ].map((pill, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => scrollToStage(idx)}
+                  className="relative px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider text-sand hover:text-ivory transition-colors group cursor-pointer"
+                >
+                  {/* Active highlight background indicator */}
+                  <motion.div
+                    style={{ opacity: pill.opacity }}
+                    className="absolute inset-0 bg-accent/15 border border-accent/50"
+                  />
+                  <span className="relative z-10 flex items-center gap-1.5">
+                    <span className="text-accent group-hover:text-brass transition-colors">
+                      {pill.num}
+                    </span>
+                    <span>{pill.name}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* Stage Counter HUD */}
+            <div className="px-3 py-1.5 bg-surface border border-stone-800 text-accent font-semibold tracking-widest text-[11px] flex items-center">
+              <span className="text-sand/70 text-[9px] mr-1.5 hidden sm:inline uppercase">
+                PHASE
+              </span>
               <div className="relative w-4 h-4 inline-flex items-center justify-center">
                 <motion.span style={{ opacity: activeStage0 }} className="absolute">01</motion.span>
                 <motion.span style={{ opacity: activeStage1 }} className="absolute">02</motion.span>
