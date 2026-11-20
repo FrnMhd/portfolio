@@ -466,7 +466,11 @@ export default function ScrollStory({ customVisual }: ScrollStoryProps) {
       containerRef.current.offsetHeight - window.innerHeight;
     const targetScrollY =
       containerTop + totalScrollableDistance * targetProgress;
-    window.scrollTo({ top: targetScrollY, behavior: "smooth" });
+    if (typeof window !== "undefined" && (window as any).lenis) {
+      (window as any).lenis.scrollTo(targetScrollY, { duration: 1.25 });
+    } else {
+      window.scrollTo({ top: targetScrollY, behavior: "smooth" });
+    }
   };
 
   // ==========================================================================
