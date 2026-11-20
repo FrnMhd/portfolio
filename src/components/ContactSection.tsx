@@ -24,46 +24,6 @@ function CopyReticleButton({
           : "border border-stone-800 text-stone-500 hover:text-ivory hover:border-accent/60 bg-surface/30"
       }`}
     >
-      {/* Corner Reticle Ticks when copied */}
-      <AnimatePresence>
-        {isCopied && (
-          <>
-            <motion.span
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute -top-1 -left-1 text-accent text-[8px] pointer-events-none"
-            >
-              ┌
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute -top-1 -right-1 text-accent text-[8px] pointer-events-none"
-            >
-              ┐
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute -bottom-1 -left-1 text-accent text-[8px] pointer-events-none"
-            >
-              └
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute -bottom-1 -right-1 text-accent text-[8px] pointer-events-none"
-            >
-              ┘
-            </motion.span>
-          </>
-        )}
-      </AnimatePresence>
-
       <AnimatePresence mode="wait">
         {isCopied ? (
           <motion.span
