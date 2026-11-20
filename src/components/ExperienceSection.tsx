@@ -56,7 +56,7 @@ export default function ExperienceSection() {
         <Reveal>
           <div className="mb-20">
             <span className="text-[10px] text-brass font-mono uppercase tracking-widest block mb-3">
-              [ 02 / history ]
+              [ 02 / EXPERIENCE ]
             </span>
             <h2 className="text-4xl md:text-5xl font-light text-ivory tracking-tight">
               Professional <span className="font-serif italic font-normal text-accent">Experience</span>

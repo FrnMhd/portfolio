@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# temporary 3D downloads
+/public/three-ws/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

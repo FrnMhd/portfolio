@@ -531,7 +531,7 @@ export default function ScrollStory({ customVisual }: ScrollStoryProps) {
         <div className="max-w-6xl w-full mx-auto flex items-center justify-between border-b border-stone-800/80 pb-5 mb-auto relative z-20">
           <div>
             <span className="text-[10px] text-brass font-mono uppercase tracking-widest block mb-1">
-              [ 04 / PROCESS_BLUEPRINT ]
+              [ 04 / PROCESS ]
             </span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light text-ivory tracking-tight">
               Engineering <span className="font-serif italic font-normal text-accent">Lifecycle</span>
@@ -541,7 +541,7 @@ export default function ScrollStory({ customVisual }: ScrollStoryProps) {
           {/* Tactical Stage Counter HUD */}
           <div className="flex items-center gap-3 font-mono text-xs">
             <span className="hidden sm:inline text-sand uppercase text-[10px] tracking-widest">
-              ACTIVE_PHASE:
+              PHASE:
             </span>
             <div className="px-3 py-1 bg-surface border border-stone-800 text-accent font-semibold tracking-widest text-[11px] flex items-center">
               <div className="relative w-4 h-4 inline-flex items-center justify-center">

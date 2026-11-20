@@ -8,19 +8,19 @@ export default function ContactSection() {
 
   const contactLinks = [
     {
-      label: "EMAIL_ENDPOINT",
+      label: "EMAIL",
       value: "farhanmedappil@gmail.com",
       url: "mailto:farhanmedappil@gmail.com",
       code: "01"
     },
     {
-      label: "LINKEDIN_PROFILE",
+      label: "LINKEDIN",
       value: "linkedin.com/in/farhanmp",
       url: "https://www.linkedin.com/in/farhanmp",
       code: "02"
     },
     {
-      label: "GITHUB_REPOSITORY",
+      label: "GITHUB",
       value: "github.com/FrnMhd",
       url: "https://github.com/FrnMhd",
       code: "03"
@@ -40,34 +40,34 @@ export default function ContactSection() {
         className="py-32 bg-background relative overflow-hidden border-b border-stone-850"
       >
         <div className="max-w-6xl mx-auto px-6 relative z-10">
-          
+
           {/* Section Header */}
           <Reveal>
             <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between">
               <div>
                 <span className="text-[10px] text-brass font-mono uppercase tracking-widest block mb-3">
-                  [ 06 / ENDPOINT_TRANSMISSION ]
+                  [ 06 / CONTACT ]
                 </span>
                 <h2 className="text-4xl md:text-5xl font-light text-ivory tracking-tight">
                   Get In <span className="font-serif italic font-normal text-accent">Touch</span>
                 </h2>
               </div>
               <div className="mt-4 md:mt-0 font-mono text-[10px] uppercase tracking-widest text-stone-500">
-                {"// SIGNAL_STRENGTH: 100%"}
+                {"// CALICUT, INDIA"}
               </div>
             </div>
           </Reveal>
 
           {/* Contact Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-            
+
             {/* Left side info (7 cols) */}
             <div className="lg:col-span-7 flex flex-col items-start font-mono text-xs text-sand">
-              <p className="leading-relaxed mb-8 max-w-xl text-stone-300">
-                Interested in collaboration, backend system integration, or automation pipelines? 
+              <p className="leading-relaxed mb-8 max-w-xl text-sand">
+                Interested in collaboration, backend system integration, or automation pipelines?
                 Feel free to establish communication through the endpoints provided here.
               </p>
-              
+
               {/* Tactical Status Panel */}
               <div className="relative border border-accent/40 bg-surface/20 p-8 w-full max-w-xl shadow-[0_0_20px_rgba(200,112,64,0.08)]">
                 {/* Corner Crosshair Reticles */}
@@ -78,10 +78,10 @@ export default function ContactSection() {
 
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-brass uppercase tracking-widest text-[10px] font-semibold">
-                    {"// COMMUNICATIONS_STATUS"}
+                    {"// AVAILABILITY"}
                   </span>
                   <span className="text-[9px] text-stone-500 uppercase tracking-widest">
-                    LATENCY: 12ms
+                    UTC +05:30
                   </span>
                 </div>
 
@@ -148,7 +148,7 @@ export default function ContactSection() {
       <footer className="py-12 bg-background border-t border-stone-850 text-center font-mono text-[10px] text-stone-500">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p>
-            &copy; {new Date().getFullYear()} Farhan Medappil. Built with Next.js, Tailwind, and Three.js.
+            &copy; {new Date().getFullYear()} Farhan Medappil.
           </p>
           <div className="flex items-center gap-4 uppercase tracking-widest text-stone-600">
             <span>[ SYSTEM_ONLINE ]</span>

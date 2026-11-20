@@ -29,7 +29,7 @@ export default function AboutSection() {
         <Reveal>
           <div className="mb-20">
             <span className="text-[10px] text-brass font-mono uppercase tracking-widest block mb-3">
-              [ 05 / bio ]
+              [ 05 / ABOUT ]
             </span>
             <h2 className="text-4xl md:text-5xl font-light text-ivory tracking-tight">
               About <span className="font-serif italic font-normal text-accent">Me</span>
@@ -44,7 +44,7 @@ export default function AboutSection() {
           <div className="lg:col-span-7 space-y-6 text-sm font-mono text-sand leading-relaxed">
             <Reveal delay={0.2}>
               <div>
-                <span className="text-brass uppercase tracking-widest text-[10px] font-semibold block mb-2">{"// THE_CONTEXT"}</span>
+                <span className="text-brass uppercase tracking-widest text-[10px] font-semibold block mb-2">{"// BACKGROUND"}</span>
                 <p>
                   I am a software developer working at the intersection of web engineering and systems automation. 
                   My focus is on creating logical, efficient digital architectures using clean source code and well-designed relational patterns.
@@ -54,7 +54,7 @@ export default function AboutSection() {
 
             <Reveal delay={0.3}>
               <div>
-                <span className="text-brass uppercase tracking-widest text-[10px] font-semibold block mb-2">{"// INTENTIONS"}</span>
+                <span className="text-brass uppercase tracking-widest text-[10px] font-semibold block mb-2">{"// FOCUS"}</span>
                 <p>
                   I build backends, custom CMS setups, automation scripts, and front-end architectures that prioritize speed and structure. 
                   I avoid bloated layers in favor of clear design and clean API endpoints.
@@ -67,7 +67,7 @@ export default function AboutSection() {
           <div className="lg:col-span-5 font-mono text-xs">
             <Reveal delay={0.4}>
               <div>
-                <span className="text-brass uppercase tracking-widest text-[10px] font-semibold block mb-4">{"// SKILLS_MATRIX"}</span>
+                <span className="text-brass uppercase tracking-widest text-[10px] font-semibold block mb-4">{"// CORE_SKILLS"}</span>
                 
                 <div className="border-t border-stone-800 divide-y divide-stone-800">
                   {categories.map((cat, idx) => (

@@ -43,7 +43,7 @@ export default function Projects() {
         <Reveal>
           <div className="mb-20">
             <span className="text-[10px] text-brass font-mono uppercase tracking-widest block mb-3">
-              [ 03 / work ]
+              [ 03 / PROJECTS ]
             </span>
             <h2 className="text-4xl md:text-5xl font-light text-ivory tracking-tight">
               Selected <span className="font-serif italic font-normal text-accent">Projects</span>
